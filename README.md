@@ -1,36 +1,40 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Afiliado Store - Projeto Next.js 🚀
 
-## Getting Started
+Bem-vindo ao repositório Afiliado Store, um projeto Next.js voltado para afiliados que desejam compartilhar links de produtos de diferentes plataformas como Amazon, Magazine Luiza e Mercado Livre.
 
-First, run the development server:
+## Sobre o Projeto
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+O Afiliado Store é uma aplicação web que permite aos afiliados postarem links de produtos, visualizarem os últimos produtos postados, obterem mais informações sobre um produto específico, e gerenciarem esses produtos por meio de um painel de administração.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Tecnologias Utilizadas
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Frontend:**
+  - [Next.js 14](https://nextjs.org/) 🌐
+  - [Styled Components](https://styled-components.com/) 💅
+  - [Material UI](https://mui.com/) 🎨
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- **Backend:**
+  - [Prisma](https://www.prisma.io/) (integrado com MongoDB) 🛠️
+  - API para CRUD de produtos e extração de dados de URL 📦
 
-## Learn More
+## Funcionalidades
 
-To learn more about Next.js, take a look at the following resources:
+### Página Principal (page.tsx)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Mostra os últimos produtos postados pelos afiliados. 📰
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### Página do Produto \([id].tsx\)
 
-## Deploy on Vercel
+- Exibe mais informações sobre um produto específico.
+- Inclui um link para redirecionamento ao site do produto.
+- Adiciona metadados do produto na URL para facilitar o compartilhamento. 🛍️
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Painel de Administração
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- Página para visualizar todos os produtos cadastrados.
+- Possibilidade de editar, deletar e pesquisar produtos. 🧑‍💼
+
+### Página de Cadastro de Produtos
+
+- Integração com a API do backend para realizar um scrap da URL.
+- Facilita o cadastro de novos produtos. 📝
