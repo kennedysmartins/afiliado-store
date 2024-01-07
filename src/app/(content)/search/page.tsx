@@ -1,4 +1,5 @@
 import Navbar from "@/components/Navbar"
+import SearchList from "@/components/SearchList"
 import React from "react"
 
 const Search = () => {
@@ -6,7 +7,7 @@ const Search = () => {
     <>
       <Navbar />
       <main className="mx-auto max-w-5xl text-2xl gap-2 my-10">
-        Pesquisando por: #searchTerm
+        <SearchList />
       </main>
     </>
   )
