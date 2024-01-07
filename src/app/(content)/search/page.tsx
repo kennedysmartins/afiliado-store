@@ -1,12 +1,15 @@
 import Navbar from "@/components/Navbar"
+import React from "react"
 
-export default function Home() {
+const Search = () => {
   return (
     <>
       <Navbar />
       <main className="mx-auto max-w-5xl text-2xl gap-2 my-10">
-        <h1>Hello</h1>
+        Pesquisando por: #searchTerm
       </main>
     </>
   )
 }
+
+export default Search
