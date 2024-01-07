@@ -1,1 +1,1 @@
-console.log("Middleware")
+console.log("Middleware loaded")
