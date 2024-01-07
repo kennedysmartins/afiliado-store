@@ -1,4 +1,5 @@
 import AdminNavbar from "@/components/AdminNavbar"
+import { AdminSidebar } from "@/components/AdminSidebar"
 
 export default function RootLayout({
   children,
@@ -7,8 +8,11 @@ export default function RootLayout({
 }) {
   return (
     <>
-        <AdminNavbar/>
-      <div>{children}</div>
+      <AdminNavbar className="lg:hidden block" />
+      <div className="flex">
+      <AdminSidebar className="hidden lg:block" />
+        {children}
+        </div>
     </>
   )
 }
