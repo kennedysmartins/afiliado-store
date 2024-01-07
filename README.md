@@ -10,8 +10,8 @@ O Afiliado Store é uma aplicação web que permite aos afiliados postarem links
 
 - **Frontend:**
   - [Next.js 14](https://nextjs.org/) 🌐
-  - [Styled Components](https://styled-components.com/) 💅
-  - [Material UI](https://mui.com/) 🎨
+  - [TailwindCSS](https://tailwindcss.com/) 💅
+  - [Shadcn UI](https://ui.shadcn.com/) 🎨
 
 - **Backend:**
   - [Prisma](https://www.prisma.io/) (integrado com MongoDB) 🛠️
