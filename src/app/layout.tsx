@@ -1,5 +1,5 @@
 import type { Metadata } from "next"
-import { ThemeProvider } from "@/providers/ThemeProvider"
+import { ThemeProvider } from "@/contexts/ThemeProvider"
 import "./globals.css"
 import Navbar from "@/components/Navbar"
 
