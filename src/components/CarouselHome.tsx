@@ -23,7 +23,7 @@ export function CarouselHome() {
   return (
       <Carousel
         plugins={[plugin.current]}
-        className="w-full sm:h-[450px] h-44 justify-center items-center"
+        className="w-full sm:h-[450px] mb-10 h-44 justify-center items-center"
         onMouseEnter={plugin.current.stop}
         onMouseLeave={plugin.current.reset}
       >
