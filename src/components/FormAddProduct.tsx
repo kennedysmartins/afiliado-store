@@ -71,7 +71,7 @@ export function FormAddProduct() {
                   <Button>Analisar</Button>
                 </div>
               </FormControl>
-              <FormDescription>Cole a URL que deseja analisar.</FormDescription>
+              <FormDescription>{"*(Opicional) Defina a URL que deseja analisar."}</FormDescription>
               <FormMessage />
             </FormItem>
           )}
