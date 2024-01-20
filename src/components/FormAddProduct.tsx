@@ -18,27 +18,17 @@ import {
 import { Input } from "@/components/ui/input"
 
 const formSchema = z.object({
-  urlProduct: z.string().min(2, {
-    message: "urlProduct must be at least 2 characters.",
-  }),
+  urlProduct: z.string(),
   buyLink: z.string().min(2, {
-    message: "buyLink must be at least 2 characters.",
+    message: "Você precisa definir um link de encaminhamento.",
   }),
   nameProduct: z.string().min(2, {
-    message: "nameProduct must be at least 2 characters.",
+    message: "Você precisa definir um nome para o produto.",
   }),
-  conditionPayment: z.string().min(2, {
-    message: "conditionPayment must be at least 2 characters.",
-  }),
-  currentPrice: z.string().min(2, {
-    message: "currentPrice must be at least 2 characters.",
-  }),
-  website: z.string().min(2, {
-    message: "website must be at least 2 characters.",
-  }),
-  oldPrice: z.string().min(2, {
-    message: "oldPrice must be at least 2 characters.",
-  }),
+  conditionPayment: z.string(),
+  oldPrice: z.string(),
+  currentPrice: z.string(),
+  website: z.string(),
 })
 
 export function FormAddProduct() {
@@ -78,7 +68,7 @@ export function FormAddProduct() {
                 <div className="flex w-full max-w-sm items-center space-x-2">
                   <Input placeholder="https://..." {...field} />
 
-                  <Button type="submit">Analisar</Button>
+                  <Button>Analisar</Button>
                 </div>
               </FormControl>
               <FormDescription>Cole a URL que deseja analisar.</FormDescription>
