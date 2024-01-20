@@ -16,6 +16,7 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
+import { Textarea } from "./ui/textarea"
 
 const formSchema = z.object({
   urlProduct: z.string(),
@@ -52,6 +53,12 @@ export function FormAddProduct() {
     console.log(values)
   }
 
+   function onAnalyze(event: React.MouseEvent<HTMLButtonElement>) {
+     event.preventDefault()
+     const urlProductValue = form.getValues("urlProduct")
+     console.log("Url Product Value: " + urlProductValue)
+   }
+
   return (
     <Form {...form}>
       <form
@@ -66,12 +73,18 @@ export function FormAddProduct() {
               <FormLabel>URL</FormLabel>
               <FormControl>
                 <div className="flex w-full max-w-sm items-center space-x-2">
-                  <Input placeholder="https://..." {...field} />
+                  <Input
+                    placeholder="https://..."
+                    {...field}
+                    {...form.register("urlProduct")}
+                  />
 
-                  <Button>Analisar</Button>
+                  <Button onClick={onAnalyze}>Analisar</Button>
                 </div>
               </FormControl>
-              <FormDescription>{"*(Opcional) Defina a URL que deseja analisar."}</FormDescription>
+              <FormDescription>
+                {"*(Opcional) Defina a URL que deseja analisar."}
+              </FormDescription>
               <FormMessage />
             </FormItem>
           )}
@@ -86,7 +99,7 @@ export function FormAddProduct() {
             <FormItem>
               <FormLabel>Nome do produto</FormLabel>
               <FormControl>
-                <Input placeholder="iPhone 15 Pro 256GB Preto" {...field} />
+                <Textarea placeholder="iPhone 15 Pro 256GB Preto" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
