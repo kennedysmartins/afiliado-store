@@ -3,6 +3,7 @@
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
+import {Product} from "@/lib/types"
 
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
@@ -17,19 +18,29 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "./ui/textarea"
+import { createProduct } from "@/lib/api"
 
 const formSchema = z.object({
-  urlProduct: z.string(),
+  id: z.string(),
+  title: z.string().min(2, {
+    message: "Você precisa definir um título para o produto.",
+  }),
+  image: z.string(),
+  currentPrice: z.string(),
+  originalPrice: z.string(),
+  recurrencePrice: z.string(),
   buyLink: z.string().min(2, {
     message: "Você precisa definir um link de encaminhamento.",
   }),
-  nameProduct: z.string().min(2, {
-    message: "Você precisa definir um nome para o produto.",
-  }),
+  announcement: z.string().nullable(),
+  productCode: z.string(),
+  catchyText: z.string(),
   conditionPayment: z.string(),
-  oldPrice: z.string(),
-  currentPrice: z.string(),
   website: z.string(),
+  cupom: z.string(),
+  cupomValue: z.string(),
+  published: z.boolean(),
+  urlProduct: z.string(),
 })
 
 export function FormAddProduct() {
@@ -37,20 +48,38 @@ export function FormAddProduct() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      urlProduct: "",
-      buyLink: "",
-      nameProduct: "",
-      conditionPayment: "",
-      oldPrice: "",
+      id: "",
+      title: "",
+      image: "",
       currentPrice: "",
-      website:""
+      originalPrice: "",
+      recurrencePrice: "",
+      buyLink: "",
+      announcement: null,
+      productCode: "",
+      catchyText: "",
+      conditionPayment: "",
+      website: "",
+      cupom: "",
+      cupomValue: "",
+      published: false,
+      urlProduct: "",
     },
   })
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values)
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    const { cupomValue, currentPrice, originalPrice, recurrencePrice, urlProduct, id, ...valuesWithout } = values
+    const convertedValues = {
+      ...valuesWithout,
+      cupomValue: parseFloat(cupomValue),
+      currentPrice: parseFloat(currentPrice),
+      originalPrice: parseFloat(originalPrice),
+    }
+    const response = await createProduct(convertedValues)
+    if(response) {
+      alert("Produto criado com sucesso!")
+      console.log(response)
+    }
   }
 
    function onAnalyze(event: React.MouseEvent<HTMLButtonElement>) {
@@ -94,7 +123,55 @@ export function FormAddProduct() {
 
         <FormField
           control={form.control}
-          name="nameProduct"
+          name="catchyText"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Texto Chamativo</FormLabel>
+              <FormControl>
+                <Input
+                  placeholder="O mais querido, com um preço TOP 🍎"
+                  {...field}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="cupom"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Cupom</FormLabel>
+              <FormControl>
+                <Input placeholder="promo10" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="cupomValue"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Valor do Cupom</FormLabel>
+              <FormControl>
+                <Input
+                  placeholder="809.90"
+                  {...field}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="title"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Nome do produto</FormLabel>
@@ -123,12 +200,15 @@ export function FormAddProduct() {
         <div className="flex w-full min-w-full gap-2">
           <FormField
             control={form.control}
-            name="oldPrice"
+            name="originalPrice"
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Preço Antigo</FormLabel>
                 <FormControl>
-                  <Input placeholder="12.220,99" {...field} />
+                  <Input
+                    placeholder="12.220,99"
+                    {...field}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -142,7 +222,10 @@ export function FormAddProduct() {
               <FormItem>
                 <FormLabel>Preço</FormLabel>
                 <FormControl>
-                  <Input placeholder="10.220,99" {...field} />
+                  <Input
+                    placeholder="10.220,99"
+                    {...field}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -169,6 +252,19 @@ export function FormAddProduct() {
 
         <FormField
           control={form.control}
+          name="image"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>URL da Imagem</FormLabel>
+              <FormControl>
+                <Input placeholder="https://..." {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
           name="website"
           render={({ field }) => (
             <FormItem>
@@ -180,7 +276,6 @@ export function FormAddProduct() {
             </FormItem>
           )}
         />
-
         <Button type="submit">Criar Produto</Button>
       </form>
     </Form>
