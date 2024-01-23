@@ -18,7 +18,7 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table"
-
+import { Skeleton } from "@/components/ui/skeleton"
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
 import {
@@ -40,47 +40,51 @@ import {
   TableRow,
 } from "@/components/ui/table"
 
-const data: Payment[] = [
-  {
-    id: "m5gr84i9",
-    amount: 316,
-    status: "success",
-    email: "ken99@yahoo.com",
-  },
-  {
-    id: "3u1reuv4",
-    amount: 242,
-    status: "success",
-    email: "Abe45@gmail.com",
-  },
-  {
-    id: "derv1ws0",
-    amount: 837,
-    status: "processing",
-    email: "Monserrat44@gmail.com",
-  },
-  {
-    id: "5kma53ae",
-    amount: 874,
-    status: "success",
-    email: "Silas22@gmail.com",
-  },
-  {
-    id: "bhqecj4p",
-    amount: 721,
-    status: "failed",
-    email: "carmella@hotmail.com",
-  },
-]
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { fetchProducts } from "@/lib/api"
+import { Product } from "@/lib/types"
+
+// const data: Payment[] = [
+//   {
+//     id: "m5gr84i9",
+//     currentPrice: 316,
+//     status: "success",
+//     title: "ken99@yahoo.com",
+//   },
+//   {
+//     id: "3u1reuv4",
+//     currentPrice: 242,
+//     status: "success",
+//     title: "Abe45@gmail.com",
+//   },
+//   {
+//     id: "derv1ws0",
+//     currentPrice: 837,
+//     status: "processing",
+//     title: "Monserrat44@gmail.com",
+//   },
+//   {
+//     id: "5kma53ae",
+//     currentPrice: 874,
+//     status: "success",
+//     title: "Silas22@gmail.com",
+//   },
+//   {
+//     id: "bhqecj4p",
+//     currentPrice: 721,
+//     status: "failed",
+//     title: "carmella@hotmail.com",
+//   },
+// ]
 
 export type Payment = {
   id: string
-  amount: number
+  currentPrice: number
   status: "pending" | "processing" | "success" | "failed"
-  email: string
+  title: string
 }
 
-export const columns: ColumnDef<Payment>[] = [
+export const columns: ColumnDef<Product>[] = [
   {
     id: "select",
     header: ({ table }) => (
@@ -104,41 +108,77 @@ export const columns: ColumnDef<Payment>[] = [
     enableHiding: false,
   },
   {
-    accessorKey: "status",
-    header: "Status",
-    cell: ({ row }) => (
-      <div className="capitalize">{row.getValue("status")}</div>
-    ),
+    accessorKey: "id",
+    header: ({ column }) => {
+      return <Button variant="ghost">ID</Button>
+    },
+    cell: ({ row }) => {
+      const id: string = row.getValue("id")
+      const truncatedId = id.toString().slice(0, 5) // Ajuste o número 5 conforme necessário
+      return <div title={id.toString()}>{truncatedId}</div>
+    },
   },
   {
-    accessorKey: "email",
+    accessorKey: "image",
+    header: ({ column }) => {
+      return <Button variant="ghost">Imagem</Button>
+    },
+    cell: ({ row }) => {
+      const imageSrc = row.getValue("image")
+
+      return (
+        <div>
+          {imageSrc ? (
+            <Avatar>
+              <AvatarImage src={imageSrc} alt={row.getValue("title")} />
+              <AvatarFallback>I</AvatarFallback>
+            </Avatar>
+          ) : (
+            <Skeleton className="h-12 w-12 rounded-full" />
+          )}
+        </div>
+      )
+    },
+  },
+
+  {
+    accessorKey: "title",
     header: ({ column }) => {
       return (
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Email
+          Title
           <CaretSortIcon className="ml-2 h-4 w-4" />
         </Button>
       )
     },
-    cell: ({ row }) => <div className="lowercase">{row.getValue("email")}</div>,
+    cell: ({ row }) => <div className="lowercase">{row.getValue("title")}</div>,
   },
   {
-    accessorKey: "amount",
-    header: () => <div className="text-right">Amount</div>,
+    accessorKey: "currentPrice",
+    header: () => <div className="text-right">Preço</div>,
     cell: ({ row }) => {
-      const amount = parseFloat(row.getValue("amount"))
+      const currentPrice = parseFloat(row.getValue("currentPrice"))
 
-      // Format the amount as a dollar amount
+      // Format the currentPrice as a dollar currentPrice
       const formatted = new Intl.NumberFormat("en-US", {
         style: "currency",
         currency: "USD",
-      }).format(amount)
+      }).format(currentPrice)
 
       return <div className="text-right font-medium">{formatted}</div>
     },
+  },
+  {
+    accessorKey: "status",
+    header: "Status",
+    cell: ({ row }) => (
+      <div className="capitalize">
+        {row.getValue("status") ? "Publicado" : "Não Publicado"}
+      </div>
+    ),
   },
   {
     id: "actions",
@@ -155,15 +195,15 @@ export const columns: ColumnDef<Payment>[] = [
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-            <DropdownMenuLabel>Actions</DropdownMenuLabel>
+            <DropdownMenuLabel>Ações</DropdownMenuLabel>
             <DropdownMenuItem
               onClick={() => navigator.clipboard.writeText(payment.id)}
             >
-              Copy payment ID
+              Copiar texto
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>View customer</DropdownMenuItem>
-            <DropdownMenuItem>View payment details</DropdownMenuItem>
+            <DropdownMenuItem>Editar</DropdownMenuItem>
+            <DropdownMenuItem>Deletar</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       )
@@ -172,6 +212,7 @@ export const columns: ColumnDef<Payment>[] = [
 ]
 
 export function TableListProducts() {
+    const [products, setProducts] = React.useState<Product[]>([])
   const [sorting, setSorting] = React.useState<SortingState>([])
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
@@ -180,8 +221,26 @@ export function TableListProducts() {
     React.useState<VisibilityState>({})
   const [rowSelection, setRowSelection] = React.useState({})
 
+  const fetchProductsAPI = React.useCallback(async () => {
+    try {
+      const response: Product[] = await fetchProducts()
+      if (response) {
+        console.log(response)
+        setProducts(response)
+      }
+    } catch (error) {
+      console.error("Erro ao buscar produtos", error)
+      setProducts([])
+      return []
+    }
+  }, [])
+
+    React.useEffect(() => {
+      fetchProductsAPI()
+    }, [])
+
   const table = useReactTable({
-    data,
+    data: products,
     columns,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
@@ -204,16 +263,16 @@ export function TableListProducts() {
       <div className="flex items-center py-4">
         <Input
           placeholder="Filtrar produtos..."
-          value={(table.getColumn("email")?.getFilterValue() as string) ?? ""}
+          value={(table.getColumn("title")?.getFilterValue() as string) ?? ""}
           onChange={(event) =>
-            table.getColumn("email")?.setFilterValue(event.target.value)
+            table.getColumn("title")?.setFilterValue(event.target.value)
           }
           className="max-w-sm"
         />
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="outline" className="ml-auto">
-              Columns <ChevronDownIcon className="ml-2 h-4 w-4" />
+              Colunas <ChevronDownIcon className="ml-2 h-4 w-4" />
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
@@ -280,7 +339,7 @@ export function TableListProducts() {
                   colSpan={columns.length}
                   className="h-24 text-center"
                 >
-                  No results.
+                  Carregando...
                 </TableCell>
               </TableRow>
             )}
@@ -289,8 +348,8 @@ export function TableListProducts() {
       </div>
       <div className="flex items-center justify-end space-x-2 py-4">
         <div className="flex-1 text-sm text-muted-foreground">
-          {table.getFilteredSelectedRowModel().rows.length} of{" "}
-          {table.getFilteredRowModel().rows.length} row(s) selected.
+          {table.getFilteredSelectedRowModel().rows.length} de{" "}
+          {table.getFilteredRowModel().rows.length} linha(s) selecionada(s).
         </div>
         <div className="space-x-2">
           <Button
@@ -299,7 +358,7 @@ export function TableListProducts() {
             onClick={() => table.previousPage()}
             disabled={!table.getCanPreviousPage()}
           >
-            Previous
+            Anterior
           </Button>
           <Button
             variant="outline"
@@ -307,7 +366,7 @@ export function TableListProducts() {
             onClick={() => table.nextPage()}
             disabled={!table.getCanNextPage()}
           >
-            Next
+            Próxima
           </Button>
         </div>
       </div>
