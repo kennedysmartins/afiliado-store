@@ -2,6 +2,7 @@ import AnnouncementCard from "@/components/AnnouncementCard"
 import { CarouselHome } from "@/components/CarouselHome"
 import Navbar from "@/components/Navbar"
 import ProductCard from "@/components/ProductCard"
+import ProductList from "@/components/ProductList"
 
 export default function Home() {
   return (
@@ -13,27 +14,9 @@ export default function Home() {
         </div>
 
         <div className="container flex flex-col sm:flex-row sm:w-full">
-          <div className="flex flex-col flex-wrap justify-center items-center align-middle gap-3 sm:w-2/3 mx-auto sm:flex-row">
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-          </div>
+          <ProductList />
           <div className="flex mx-auto">
             <div className="flex flex-col w-full sm:w-1/3 gap-4">
-
               <AnnouncementCard
                 data={{
                   cardTitle: "Receba no WhatsApp",
