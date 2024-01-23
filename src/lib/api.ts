@@ -1,101 +1,110 @@
 "use server"
+import axios, { AxiosResponse } from "axios"
+import { UserData } from "./types"
 
 const apiUrl = process.env.BACKEND_URL!
 
 
 export const fetchProducts = async () => {
-    const response = await fetch(`${apiUrl}/products`);
-    const products = await response.json();
-    return products;
-}
-
-export const deleteProduct = async (productId:string) => {
-    try {
-      const response = await fetch(`${apiUrl}/products/${productId}`, {
-        method: "DELETE",
-      })
-  
-      if (response.status === 204) {
-        // A exclusão foi bem-sucedida (status 204)
-        return true;
-      } else {
-        // Trate os erros, se necessário
-        return false;
-      }
-    } catch (error) {
-      // Trate os erros de rede ou outras exceções, se necessário
-      return false;
-    }
-};
-  
-export const searchProducts = async (searchTerm:string) => {
-try {
-  console.log("Searching", searchTerm);
-    if (searchTerm) {
-    const response = await fetch(`${apiUrl}/products/search/${searchTerm}`)
-    if (response.ok) {
-        const data = await response.json();
-        return data;
-    }
-    }
-    return [];
-    } catch (error) {
-        console.error('Erro ao buscar produtos', error);
-        return [];
-    }
-};
-
-
-
-export const fetchProduct = async (id:string) => {
-    try {
-      const response = await fetch(`${apiUrl}/products/${id}`)
-      if (response.ok) {
-        const product = await response.json();
-        return product;
-      }
-    } catch (error) {
-      console.error('Erro ao buscar o produto', error);
-    }
-    return null;
-  };
-  
-export const updateProduct = async (id:string, data:object) => {
-try {
-    const response = await fetch(`${apiUrl}/products/${id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    })
-    return response.ok;
-} catch (error) {
-    console.error('Erro ao atualizar o produto', error);
-    return false;
-}
-};
-
-export const createProduct = async (data:object) => {
-  console.log("Criando produto")
   try {
-    const response = await fetch(`${apiUrl}/products`, {
-      method: "POST",
+    const response = await axios.get(`${apiUrl}/products`)
+    return response.data
+  } catch (error) {
+    console.error("Erro ao obter produtos:", error)
+    throw error // Você pode tratar o erro de outra maneira, se preferir.
+  }
+}
+
+export const deleteProduct = async (productId: string) => {
+  try {
+    const response = await axios.delete(`${apiUrl}/products/${productId}`)
+
+    if (response.status === 204) {
+      // A exclusão foi bem-sucedida (status 204)
+      return true
+    } else {
+      // Trate os erros, se necessário
+      return false
+    }
+  } catch (error) {
+    // Trate os erros de rede ou outras exceções, se necessário
+    console.error("Erro ao excluir produto:", error)
+    return false // Você pode tratar o erro de outra maneira, se preferir.
+  }
+}
+  
+export const searchProducts = async (searchTerm: string) => {
+  try {
+    console.log("Searching", searchTerm)
+
+    if (searchTerm) {
+      const response = await axios.get(
+        `${apiUrl}/products/search/${searchTerm}`
+      )
+
+      if (response.status === 200) {
+        const data = response.data
+        return data
+      }
+    }
+
+    return []
+  } catch (error) {
+    console.error("Erro ao buscar produtos", error)
+    return []
+  }
+}
+
+
+
+export const fetchProduct = async (id: string) => {
+  try {
+    const response = await axios.get(`${apiUrl}/products/${id}`)
+
+    if (response.status === 200) {
+      const product = response.data
+      return product
+    }
+  } catch (error) {
+    console.error("Erro ao buscar o produto", error)
+  }
+
+  return null
+}
+  
+export const updateProduct = async (id: string, data: object) => {
+  try {
+    const response = await axios.put(`${apiUrl}/products/${id}`, data, {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(data),
+    })
+
+    return response.status === 200
+  } catch (error) {
+    console.error("Erro ao atualizar o produto", error)
+    return false
+  }
+}
+
+export const createProduct = async (data: object) => {
+  console.log("Criando produto")
+
+  try {
+    const response = await axios.post(`${apiUrl}/products`, data, {
+      headers: {
+        "Content-Type": "application/json",
+      },
     })
 
     console.log(response)
-    
 
-    return response.ok;
+    return response.status === 201 // Verifica se o status é 201 (Created)
   } catch (error) {
-    console.error('Erro ao criar o produto', error);
-    return false;
+    console.error("Erro ao criar o produto", error)
+    return false
   }
-};
+}
 
 
  // const fetchCategories = async () => {
@@ -154,45 +163,54 @@ interface ResponseData {
   [key: string]: any;
 }
 
-export const authUser = async (data: Record<string, unknown>): Promise<ResponseData | false> => {
+export const authUser = async (
+  data: Record<string, unknown>
+): Promise<ResponseData | false> => {
   try {
-    const response = await fetch(`${apiUrl}/auth/login`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    })
+    const response: AxiosResponse = await axios.post(
+      `${apiUrl}/auth/login`,
+      data,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    )
 
-    if (!response.ok) {
-      throw new Error('Erro ao logar');
+    if (response.status !== 200) {
+      throw new Error("Erro ao logar")
     }
 
-    const responseData: ResponseData = await response.json();
-    return responseData;
+    const responseData: ResponseData = response.data
+    return responseData
   } catch (error) {
-    console.error('Erro ao logar', error);
-    return false;
+    console.error("Erro ao logar", error)
+    return false
   }
 }
 
-export const getUser = async (userId:string, jwt:string) => {
+export const getUser = async (
+  userId: string,
+  jwt: string
+): Promise<UserData | false> => {
   try {
-    const response = await fetch(`${apiUrl}/user/${userId}`, {
-      headers: {
-        Authorization: `Bearer ${jwt}`,
-      },
-    })
+    const response: AxiosResponse = await axios.get(
+      `${apiUrl}/user/${userId}`,
+      {
+        headers: {
+          Authorization: `Bearer ${jwt}`,
+        },
+      }
+    )
 
-    if (!response.ok) {
-      throw new Error(`Erro ao logar: ${response.status}`);
+    if (response.status !== 200) {
+      throw new Error(`Erro ao obter usuário: ${response.status}`)
     }
 
-    const responseData = await response.json();
-    return responseData;
+    const responseData: UserData = response.data
+    return responseData
   } catch (error) {
-    console.error('Erro ao logar', error);
-    return false;
+    console.error("Erro ao obter usuário", error)
+    return false
   }
 }
-
