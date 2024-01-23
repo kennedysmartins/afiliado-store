@@ -20,13 +20,13 @@ export default function ProductCard({ product }: { product: Product }) {
             <img
               src={product.image}
               alt={product.title}
-              className="w-full h-48 bg-contain bg-center object-cover bg-white rounded hover:scale-105 transition duration-300 p-2"
+              className="w-48 h-48 bg-contain bg-center object-contain bg-white rounded hover:scale-105 transition duration-300 p-2"
             />
           </Link>
         </CardHeader>
         <Link href="#">
           <CardContent className="p-4">
-            <CardTitle className="text-sm font-semibold mb-2 h-12 overflow-hidden">
+            <CardTitle className="text-sm font-semibold mb-2 h-11 overflow-hidden">
               {product.title}
             </CardTitle>
             <CardDescription className="mb-4 h-5 overflow-hidden">
