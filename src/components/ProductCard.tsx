@@ -29,7 +29,7 @@ export default function ProductCard({ product }: { product: Product }) {
             <CardTitle className="text-sm font-semibold mb-2 h-12 overflow-hidden">
               {product.title}
             </CardTitle>
-            <CardDescription className="mb-4 h-4 overflow-hidden">
+            <CardDescription className="mb-4 h-5 overflow-hidden">
               Frete grátis
             </CardDescription>
             <p className="text-sm line-through opacity-55 h-4 overflow-hidden">{`R$ ${product.originalPrice}`}</p>

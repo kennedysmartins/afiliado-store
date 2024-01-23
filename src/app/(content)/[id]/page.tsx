@@ -15,9 +15,7 @@ export default function ProductPage({ params: { id } }: any) {
         </div>
 
         <div className="flex flex-col flex-wrap justify-center items-center align-middle gap-8 w-full mx-auto sm:flex-row">
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
+
         </div>
       </main>
     </>
