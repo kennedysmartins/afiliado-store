@@ -19,3 +19,14 @@ export interface Product {
   updatedAt: string
   published: boolean
 }
+
+export interface UserData {
+  id: string
+  name: string
+  username: string
+  email: string
+  passwordHash: string
+  createdAt: string
+  updatedAt: string
+  token: string
+}
