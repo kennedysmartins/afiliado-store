@@ -45,6 +45,7 @@ import { toast } from "sonner"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { deleteProduct, fetchProducts } from "@/lib/api"
 import { Product } from "@/lib/types"
+import { formatCurrency, formatDate } from "@/lib/utils"
 
 // const data: Payment[] = [
 //   {
@@ -163,13 +164,11 @@ export const columns: ColumnDef<Product>[] = [
     cell: ({ row }) => {
       const currentPrice = parseFloat(row.getValue("currentPrice"))
 
-      // Format the currentPrice as a dollar currentPrice
-      const formatted = new Intl.NumberFormat("pt-BR", {
-        style: "currency",
-        currency: "BRL",
-      }).format(currentPrice)
-
-      return <div className="text-right font-medium">{formatted}</div>
+      return (
+        <div className="text-right font-medium">
+          {formatCurrency(currentPrice)}
+        </div>
+      )
     },
   },
   {
@@ -187,18 +186,7 @@ export const columns: ColumnDef<Product>[] = [
     },
     cell: ({ row }) => {
       const createdAt = new Date(row.getValue("createdAt"))
-
-      // Formatar a data usando o objeto Intl.DateTimeFormat
-      const formattedDate = new Intl.DateTimeFormat("pt-BR", {
-        year: "numeric",
-        month: "numeric",
-        day: "numeric",
-        hour: "numeric",
-        minute: "numeric",
-        second: "numeric",
-      }).format(createdAt)
-
-      return <div className="lowercase">{formattedDate}</div>
+      return <div>{formatDate(createdAt)}</div>
     },
   },
   {

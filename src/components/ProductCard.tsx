@@ -10,6 +10,7 @@ import {
 import { Button } from "./ui/button"
 import Link from "next/link"
 import { Product } from "@/lib/types"
+import { formatCurrency } from "@/lib/utils"
 
 export default function ProductCard({ product }: { product: Product }) {
   return (
@@ -24,7 +25,7 @@ export default function ProductCard({ product }: { product: Product }) {
             />
           </Link>
         </CardHeader>
-        <Link href="#">
+        <Link href={`/${product.customId}`}>
           <CardContent className="p-4">
             <CardTitle className="text-sm font-semibold mb-2 h-11 overflow-hidden">
               {product.title}
@@ -32,8 +33,12 @@ export default function ProductCard({ product }: { product: Product }) {
             <CardDescription className="mb-4 h-5 overflow-hidden">
               Frete grátis
             </CardDescription>
-            <p className="text-sm line-through opacity-55 h-4 overflow-hidden">{`R$ ${product.originalPrice}`}</p>
-            <p className=" font-medium mb-2 h-8 overflow-hidden">{`R$ ${product.currentPrice}`}</p>
+            <p className="text-sm line-through opacity-55 h-4 overflow-hidden">{`R$ ${formatCurrency(
+              product.originalPrice
+            )}`}</p>
+            <p className=" font-medium mb-2 h-8 overflow-hidden">{`R$ ${formatCurrency(
+              product.currentPrice
+            )}`}</p>
           </CardContent>
         </Link>
 
