@@ -2,7 +2,7 @@
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
-import {Product} from "@/lib/types"
+import { Product } from "@/lib/types"
 import * as React from "react"
 import { toast } from "sonner"
 
@@ -84,7 +84,6 @@ export function FormEditProduct({ id }: { id: string }) {
         originalPrice: response.originalPrice?.toString(),
       }
 
-
       if (response) {
         setProduct(updatedProduct)
         form.setValue("catchyText", updatedProduct.catchyText || "")
@@ -152,14 +151,11 @@ export function FormEditProduct({ id }: { id: string }) {
           name="catchyText"
           render={({ field }) => (
             <FormItem>
-                  <FormLabel>Texto Chamativo</FormLabel>
+              <FormLabel>Texto Chamativo</FormLabel>
               {product ? (
                 <>
                   <FormControl>
-                    <Input
-                      placeholder="O mais querido, com um preço TOP 🍎"
-                      {...field}
-                    />
+                    <Input {...field} />
                   </FormControl>
                   <FormMessage />
                 </>
@@ -175,11 +171,11 @@ export function FormEditProduct({ id }: { id: string }) {
           name="cupom"
           render={({ field }) => (
             <FormItem>
-                  <FormLabel>Cupom</FormLabel>
+              <FormLabel>Cupom</FormLabel>
               {product ? (
                 <>
                   <FormControl>
-                    <Input placeholder="promo10" {...field} />
+                    <Input {...field} />
                   </FormControl>
                   <FormMessage />
                 </>
@@ -195,11 +191,11 @@ export function FormEditProduct({ id }: { id: string }) {
           name="cupomValue"
           render={({ field }) => (
             <FormItem>
-                  <FormLabel>Valor do Cupom</FormLabel>
+              <FormLabel>Valor do Cupom</FormLabel>
               {product ? (
                 <>
                   <FormControl>
-                    <Input placeholder="809.90" {...field} />
+                    <Input {...field} />
                   </FormControl>
                   <FormMessage />
                 </>
@@ -215,14 +211,11 @@ export function FormEditProduct({ id }: { id: string }) {
           name="title"
           render={({ field }) => (
             <FormItem>
-                  <FormLabel>Nome do produto</FormLabel>
+              <FormLabel>Nome do produto</FormLabel>
               {product ? (
                 <>
                   <FormControl>
-                    <Textarea
-                      placeholder="iPhone 15 Pro 256GB Preto"
-                      {...field}
-                    />
+                    <Textarea {...field} />
                   </FormControl>
                   <FormMessage />
                 </>
@@ -238,14 +231,11 @@ export function FormEditProduct({ id }: { id: string }) {
           name="conditionPayment"
           render={({ field }) => (
             <FormItem>
-                  <FormLabel>Condições</FormLabel>
+              <FormLabel>Condições</FormLabel>
               {product ? (
                 <>
                   <FormControl>
-                    <Input
-                      placeholder="no PIX ou em 10x sem júros"
-                      {...field}
-                    />
+                    <Input {...field} />
                   </FormControl>
                   <FormMessage />
                 </>
@@ -257,65 +247,65 @@ export function FormEditProduct({ id }: { id: string }) {
         />
 
         <div className="flex w-full justify-between gap-2">
-            <FormField
-              control={form.control}
-              name="originalPrice"
-              render={({ field }) => (
-                <FormItem className="w-full">
-                  <FormLabel>Preço Antigo</FormLabel>
-                  {product ? (
-                <>
-                  <FormControl>
-                    <Input placeholder="12.220,99" {...field} />
-                  </FormControl>
-                  <FormMessage />
+          <FormField
+            control={form.control}
+            name="originalPrice"
+            render={({ field }) => (
+              <FormItem className="w-full">
+                <FormLabel>Preço Antigo</FormLabel>
+                {product ? (
+                  <>
+                    <FormControl>
+                      <Input {...field} />
+                    </FormControl>
+                    <FormMessage />
                   </>
-              ) : (
-                <Skeleton className="w-full h-10" />
-              )}
-                </FormItem>
-              )}
-            />
+                ) : (
+                  <Skeleton className="w-full h-10" />
+                )}
+              </FormItem>
+            )}
+          />
 
-            <FormField
-              control={form.control}
-              name="currentPrice"
-              render={({ field }) => (
-                <FormItem className="w-full">
-                  <FormLabel>Preço Atual</FormLabel>
-                  {product ? (
-                <>
-                  <FormControl>
-                    <Input placeholder="10.220,99" {...field} />
-                  </FormControl>
-                  <FormMessage />
+          <FormField
+            control={form.control}
+            name="currentPrice"
+            render={({ field }) => (
+              <FormItem className="w-full">
+                <FormLabel>Preço Atual</FormLabel>
+                {product ? (
+                  <>
+                    <FormControl>
+                      <Input {...field} />
+                    </FormControl>
+                    <FormMessage />
                   </>
-              ) : (
-                <Skeleton className="w-full h-10" />
-              )}
-                </FormItem>
-              )}
-            />
+                ) : (
+                  <Skeleton className="w-full h-10" />
+                )}
+              </FormItem>
+            )}
+          />
 
-            <FormField
-              control={form.control}
-              name="recurrencePrice"
-              render={({ field }) => (
-                <FormItem className="w-full">
-                  <FormLabel>Preço Recorrente</FormLabel>
-                  {product ? (
-                <>
-                  <FormControl>
-                    <Input placeholder="10.220,99" {...field} />
-                  </FormControl>
-                  <FormMessage />
+          <FormField
+            control={form.control}
+            name="recurrencePrice"
+            render={({ field }) => (
+              <FormItem className="w-full">
+                <FormLabel>Preço Recorrente</FormLabel>
+                {product ? (
+                  <>
+                    <FormControl>
+                      <Input {...field} />
+                    </FormControl>
+                    <FormMessage />
                   </>
-              ) : (
-                <Skeleton className="w-full h-10" />
-              )}
-                </FormItem>
-              )}
-            />
+                ) : (
+                  <Skeleton className="w-full h-10" />
+                )}
+              </FormItem>
+            )}
+          />
         </div>
 
         <FormField
@@ -323,14 +313,11 @@ export function FormEditProduct({ id }: { id: string }) {
           name="buyLink"
           render={({ field }) => (
             <FormItem>
-                  <FormLabel>Link de compra</FormLabel>
+              <FormLabel>Link de compra</FormLabel>
               {product ? (
                 <>
                   <FormControl>
-                    <Input
-                      placeholder="https://amazon.com.br/DSKJADSJ"
-                      {...field}
-                    />
+                    <Input {...field} />
                   </FormControl>
                   <FormMessage />
                 </>
@@ -346,11 +333,11 @@ export function FormEditProduct({ id }: { id: string }) {
           name="image"
           render={({ field }) => (
             <FormItem>
-                  <FormLabel>URL da Imagem</FormLabel>
+              <FormLabel>URL da Imagem</FormLabel>
               {product ? (
                 <>
                   <FormControl>
-                    <Input placeholder="https://..." {...field} />
+                    <Input {...field} />
                   </FormControl>
                   <FormMessage />
                 </>
@@ -366,14 +353,11 @@ export function FormEditProduct({ id }: { id: string }) {
           name="announcement"
           render={({ field }) => (
             <FormItem>
-                  <FormLabel>Anúncio</FormLabel>
+              <FormLabel>Anúncio</FormLabel>
               {product ? (
                 <>
                   <FormControl>
-                    <Input
-                      placeholder="Essa oferta pode acabar a qualquer momento!"
-                      {...field}
-                    />
+                    <Input {...field} />
                   </FormControl>
                   <FormMessage />
                 </>
@@ -389,11 +373,11 @@ export function FormEditProduct({ id }: { id: string }) {
           name="website"
           render={({ field }) => (
             <FormItem>
-                  <FormLabel>Website</FormLabel>
+              <FormLabel>Website</FormLabel>
               {product ? (
                 <>
                   <FormControl>
-                    <Input placeholder="Amazon" {...field} />
+                    <Input {...field} />
                   </FormControl>
                   <FormMessage />
                 </>

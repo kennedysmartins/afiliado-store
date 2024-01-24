@@ -175,7 +175,7 @@ export function FormAddProduct() {
             <FormItem>
               <FormLabel>Cupom</FormLabel>
               <FormControl>
-                <Input placeholder="promo10" {...field} />
+                <Input placeholder="PROMO10" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -232,7 +232,7 @@ export function FormAddProduct() {
               <FormItem className="w-full">
                 <FormLabel>Preço Antigo</FormLabel>
                 <FormControl>
-                  <Input placeholder="12.220,99" {...field} />
+                  <Input placeholder="12220.99" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -246,7 +246,7 @@ export function FormAddProduct() {
               <FormItem className="w-full">
                 <FormLabel>Preço Atual</FormLabel>
                 <FormControl>
-                  <Input placeholder="10.220,99" {...field} />
+                  <Input placeholder="10220.99" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -259,7 +259,7 @@ export function FormAddProduct() {
               <FormItem className="w-full">
                 <FormLabel>Preço Recorrente</FormLabel>
                 <FormControl>
-                  <Input placeholder="10.220,99" {...field} />
+                  <Input placeholder="9220.99" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
