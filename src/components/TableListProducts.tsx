@@ -21,6 +21,7 @@ import {
 import { Skeleton } from "@/components/ui/skeleton"
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
+import { useRouter } from "next/navigation"
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -39,9 +40,10 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
+import { toast } from "sonner"
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { fetchProducts } from "@/lib/api"
+import { deleteProduct, fetchProducts } from "@/lib/api"
 import { Product } from "@/lib/types"
 
 // const data: Payment[] = [
@@ -124,7 +126,7 @@ export const columns: ColumnDef<Product>[] = [
       return <Button variant="ghost">Imagem</Button>
     },
     cell: ({ row }) => {
-      const imageSrc = row.getValue("image")
+      const imageSrc = row.getValue("image") ?? ""
 
       return (
         <div>
@@ -163,12 +165,41 @@ export const columns: ColumnDef<Product>[] = [
       const currentPrice = parseFloat(row.getValue("currentPrice"))
 
       // Format the currentPrice as a dollar currentPrice
-      const formatted = new Intl.NumberFormat("en-US", {
+      const formatted = new Intl.NumberFormat("pt-BR", {
         style: "currency",
-        currency: "USD",
+        currency: "BRL",
       }).format(currentPrice)
 
       return <div className="text-right font-medium">{formatted}</div>
+    },
+  },
+  {
+    accessorKey: "createdAt",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Data
+          <CaretSortIcon className="ml-2 h-4 w-4" />
+        </Button>
+      )
+    },
+    cell: ({ row }) => {
+      const createdAt = new Date(row.getValue("createdAt"))
+
+      // Formatar a data usando o objeto Intl.DateTimeFormat
+      const formattedDate = new Intl.DateTimeFormat("pt-BR", {
+        year: "numeric",
+        month: "numeric",
+        day: "numeric",
+        hour: "numeric",
+        minute: "numeric",
+        second: "numeric",
+      }).format(createdAt)
+
+      return <div className="lowercase">{formattedDate}</div>
     },
   },
   {
@@ -184,26 +215,41 @@ export const columns: ColumnDef<Product>[] = [
     id: "actions",
     enableHiding: false,
     cell: ({ row }) => {
-      const payment = row.original
+      const productId: string = row.getValue("id")
+
+      const router = useRouter() // Obtenha o objeto do router
 
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" className="h-8 w-8 p-0">
-              <span className="sr-only">Open menu</span>
+              <span className="sr-only">Abrir menu</span>
               <DotsHorizontalIcon className="h-4 w-4" />
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Ações</DropdownMenuLabel>
             <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(payment.id)}
+              onClick={() => navigator.clipboard.writeText(productId)}
             >
-              Copiar texto
+              Copiar ID
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>Editar</DropdownMenuItem>
-            <DropdownMenuItem>Deletar</DropdownMenuItem>
+            <DropdownMenuItem onClick={() => {
+              router.push("/admin/products/edit/"+productId)
+            }}>Editar</DropdownMenuItem>
+            <DropdownMenuItem
+            className="text-red-500"
+              onClick={() => {
+                deleteProduct(productId)
+                toast("Um produto foi deletado.")
+                setTimeout(() => {
+                location.reload()
+                }, 1000)
+              }}
+            >
+              Deletar
+            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       )
@@ -212,7 +258,8 @@ export const columns: ColumnDef<Product>[] = [
 ]
 
 export function TableListProducts() {
-    const [products, setProducts] = React.useState<Product[]>([])
+  const router = useRouter()
+  const [products, setProducts] = React.useState<Product[]>([])
   const [sorting, setSorting] = React.useState<SortingState>([])
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
@@ -235,9 +282,9 @@ export function TableListProducts() {
     }
   }, [])
 
-    React.useEffect(() => {
-      fetchProductsAPI()
-    }, [])
+  React.useEffect(() => {
+    fetchProductsAPI()
+  }, [])
 
   const table = useReactTable({
     data: products,
