@@ -217,7 +217,6 @@ export const columns: ColumnDef<Product>[] = [
     cell: ({ row }) => {
       const productId: string = row.getValue("id")
 
-      const router = useRouter() // Obtenha o objeto do router
 
       return (
         <DropdownMenu>
@@ -236,7 +235,7 @@ export const columns: ColumnDef<Product>[] = [
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem onClick={() => {
-              router.push("/admin/products/edit/"+productId)
+              window.location.href = `/admin/products/edit/${productId}` 
             }}>Editar</DropdownMenuItem>
             <DropdownMenuItem
             className="text-red-500"
