@@ -125,30 +125,29 @@ export function FormAddProduct() {
         onSubmit={form.handleSubmit(onSubmit)}
         className="space-y-8 mt-10 w-full"
       >
-        <FormField
-          control={form.control}
-          name="urlProduct"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>URL</FormLabel>
-              <FormControl>
-                <div className="flex w-full max-w-sm items-center space-x-2">
-                  <Input
-                    placeholder="https://..."
-                    {...field}
-                    {...form.register("urlProduct")}
-                  />
-
-                  <Button onClick={onAnalyze}>Analisar</Button>
-                </div>
-              </FormControl>
-              <FormDescription>
-                {"*(Opcional) Defina a URL que deseja analisar."}
-              </FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+          <FormField
+            control={form.control}
+            name="urlProduct"
+            render={({ field }) => (
+              <FormItem className="w-2/3">
+                <FormLabel>URL</FormLabel>
+                <FormControl>
+                  <div className="flex gap-3 items-center">
+                    <Input
+                      placeholder="https://..."
+                      {...field}
+                      {...form.register("urlProduct")}
+                    />
+                    <Button onClick={onAnalyze}>Analisar</Button>
+                  </div>
+                </FormControl>
+                <FormDescription>
+                  {"*(Opcional) Defina a URL que deseja analisar."}
+                </FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
         <Separator />
 
@@ -225,12 +224,12 @@ export function FormAddProduct() {
           )}
         />
 
-        <div className="flex w-full min-w-full gap-2">
+        <div className="flex w-full justify-between gap-2">
           <FormField
             control={form.control}
             name="originalPrice"
             render={({ field }) => (
-              <FormItem>
+              <FormItem className="w-full">
                 <FormLabel>Preço Antigo</FormLabel>
                 <FormControl>
                   <Input placeholder="12.220,99" {...field} />
@@ -244,8 +243,21 @@ export function FormAddProduct() {
             control={form.control}
             name="currentPrice"
             render={({ field }) => (
-              <FormItem>
-                <FormLabel>Preço</FormLabel>
+              <FormItem className="w-full">
+                <FormLabel>Preço Atual</FormLabel>
+                <FormControl>
+                  <Input placeholder="10.220,99" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="recurrencePrice"
+            render={({ field }) => (
+              <FormItem className="w-full">
+                <FormLabel>Preço Recorrente</FormLabel>
                 <FormControl>
                   <Input placeholder="10.220,99" {...field} />
                 </FormControl>
@@ -293,7 +305,10 @@ export function FormAddProduct() {
             <FormItem>
               <FormLabel>Anúncio</FormLabel>
               <FormControl>
-                <Input placeholder="Essa oferta pode acabar a qualquer momento!" {...field} />
+                <Input
+                  placeholder="Essa oferta pode acabar a qualquer momento!"
+                  {...field}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
