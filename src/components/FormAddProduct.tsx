@@ -3,7 +3,7 @@
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
-import {Product} from "@/lib/types"
+import { Product } from "@/lib/types"
 import { toast } from "sonner"
 
 import { Button } from "@/components/ui/button"
@@ -19,7 +19,7 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "./ui/textarea"
-import { createProduct } from "@/lib/api"
+import { createProduct, extractProduct } from "@/lib/api"
 
 const formSchema = z.object({
   id: z.string(),
@@ -45,7 +45,6 @@ const formSchema = z.object({
 })
 
 export function FormAddProduct() {
-
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -69,7 +68,15 @@ export function FormAddProduct() {
   })
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    const { cupomValue, currentPrice, originalPrice, recurrencePrice, urlProduct, id, ...valuesWithout } = values
+    const {
+      cupomValue,
+      currentPrice,
+      originalPrice,
+      recurrencePrice,
+      urlProduct,
+      id,
+      ...valuesWithout
+    } = values
     const convertedValues = {
       ...valuesWithout,
       cupomValue: parseFloat(cupomValue),
@@ -77,18 +84,25 @@ export function FormAddProduct() {
       originalPrice: parseFloat(originalPrice),
     }
     const response = await createProduct(convertedValues)
-    if(response) {
+    if (response) {
       toast("Produto criado com sucesso!")
       form.reset()
       console.log(response)
     }
   }
 
-   function onAnalyze(event: React.MouseEvent<HTMLButtonElement>) {
-     event.preventDefault()
-     const urlProductValue = form.getValues("urlProduct")
-     console.log("Url Product Value: " + urlProductValue)
-   }
+  async function onAnalyze(event: React.MouseEvent<HTMLButtonElement>) {
+    event.preventDefault()
+    const urlProductValue = form.getValues("urlProduct")
+    console.log("Extraindo: " + urlProductValue)
+    const response = await extractProduct(urlProductValue)
+    console.log(response)
+    if (response) {
+      toast("Produto extraído com sucesso!")
+      form.setValue("title", response.title || "")
+      form.setValue("image", response.image || "")
+    }
+  }
 
   return (
     <Form {...form}>
@@ -161,10 +175,7 @@ export function FormAddProduct() {
             <FormItem>
               <FormLabel>Valor do Cupom</FormLabel>
               <FormControl>
-                <Input
-                  placeholder="809.90"
-                  {...field}
-                />
+                <Input placeholder="809.90" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -207,10 +218,7 @@ export function FormAddProduct() {
               <FormItem>
                 <FormLabel>Preço Antigo</FormLabel>
                 <FormControl>
-                  <Input
-                    placeholder="12.220,99"
-                    {...field}
-                  />
+                  <Input placeholder="12.220,99" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -224,10 +232,7 @@ export function FormAddProduct() {
               <FormItem>
                 <FormLabel>Preço</FormLabel>
                 <FormControl>
-                  <Input
-                    placeholder="10.220,99"
-                    {...field}
-                  />
+                  <Input placeholder="10.220,99" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
