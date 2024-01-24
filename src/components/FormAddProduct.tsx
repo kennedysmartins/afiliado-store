@@ -4,6 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
 import {Product} from "@/lib/types"
+import { toast } from "sonner"
 
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
@@ -77,7 +78,8 @@ export function FormAddProduct() {
     }
     const response = await createProduct(convertedValues)
     if(response) {
-      alert("Produto criado com sucesso!")
+      toast("Produto criado com sucesso!")
+      form.reset()
       console.log(response)
     }
   }
