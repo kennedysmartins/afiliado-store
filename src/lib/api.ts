@@ -74,6 +74,7 @@ export const fetchProduct = async (id: string) => {
   
 export const updateProduct = async (id: string, data: object) => {
   try {
+    console.log(`${apiUrl}/products/${id}`)
     const response = await axios.put(`${apiUrl}/products/${id}`, data, {
       headers: {
         "Content-Type": "application/json",
