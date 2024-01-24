@@ -45,7 +45,7 @@ const SearchList = () => {
       <p>Pesquisando por: {term}</p>
       <div className="my-11 flex flex-wrap gap-3">
         {products.map((product) => (
-          <ProductCard key={product.id} product={product} />
+          <ProductCard key={product.customId} product={product} />
         ))}
       </div>
     </div>

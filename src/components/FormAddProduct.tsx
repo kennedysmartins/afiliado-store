@@ -94,7 +94,7 @@ export function FormAddProduct() {
           action: {
             label: "Desfazer",
             onClick: () => {
-              deleteProduct(response.id)
+              deleteProduct(response.customId)
               toast.error("Um produto foi deletado.")
             },
           },

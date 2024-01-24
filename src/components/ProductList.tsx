@@ -36,7 +36,7 @@ const ProductList = () => {
   return (
       <div className="flex flex-col flex-wrap justify-center items-center align-middle gap-3 sm:w-2/3 mx-auto sm:flex-row">
         {products.map((product) => (
-          <ProductCard key={product.id} product={product} />
+          <ProductCard key={product.customId} product={product} />
         ))}
       </div>
   )

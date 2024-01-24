@@ -110,14 +110,13 @@ export const columns: ColumnDef<Product>[] = [
     enableHiding: false,
   },
   {
-    accessorKey: "id",
+    accessorKey: "customId",
     header: ({ column }) => {
       return <Button variant="ghost">ID</Button>
     },
     cell: ({ row }) => {
-      const id: string = row.getValue("id")
-      const truncatedId = id.toString().slice(0, 5) // Ajuste o número 5 conforme necessário
-      return <div title={id.toString()}>{truncatedId}</div>
+      const customId: string = row.getValue("customId")
+      return <div>{customId}</div>
     },
   },
   {
@@ -156,7 +155,7 @@ export const columns: ColumnDef<Product>[] = [
         </Button>
       )
     },
-    cell: ({ row }) => <div className="lowercase">{row.getValue("title")}</div>,
+    cell: ({ row }) => <div>{row.getValue("title")}</div>,
   },
   {
     accessorKey: "currentPrice",
@@ -215,7 +214,7 @@ export const columns: ColumnDef<Product>[] = [
     id: "actions",
     enableHiding: false,
     cell: ({ row }) => {
-      const productId: string = row.getValue("id")
+      const productId: string = row.getValue("customId")
 
 
       return (

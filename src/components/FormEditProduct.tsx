@@ -98,7 +98,7 @@ export function FormEditProduct({ id }: { id: string }) {
         form.setValue("buyLink", updatedProduct.buyLink || "")
         form.setValue("conditionPayment", updatedProduct.conditionPayment || "")
         form.setValue("website", updatedProduct.website || "")
-        form.setValue("id", updatedProduct.id || "")
+        form.setValue("id", updatedProduct.customId || "")
       }
     } catch (error) {
       console.error("Erro ao buscar produto", error)

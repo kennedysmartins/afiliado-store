@@ -1,5 +1,6 @@
 export interface Product {
   id: string
+  customId: string
   title: string
   image: string
   currentPrice: number
