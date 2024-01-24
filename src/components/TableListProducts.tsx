@@ -126,7 +126,7 @@ export const columns: ColumnDef<Product>[] = [
       return <Button variant="ghost">Imagem</Button>
     },
     cell: ({ row }) => {
-      const imageSrc = row.getValue("image") ?? ""
+       const imageSrc: string = row.getValue("image") || "";
 
       return (
         <div>
