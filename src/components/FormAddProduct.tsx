@@ -69,7 +69,7 @@ export function FormAddProduct() {
 
   
 
-  async function onSubmit(values: z.infer<typeof formSchema>) {
+async function onSubmit(values: z.infer<typeof formSchema>) {
     const {
       cupomValue,
       currentPrice,
@@ -79,32 +79,36 @@ export function FormAddProduct() {
       id,
       ...valuesWithout
     } = values
+
     const convertedValues = {
       ...valuesWithout,
       cupomValue: parseFloat(cupomValue),
       currentPrice: parseFloat(currentPrice),
       originalPrice: parseFloat(originalPrice),
     }
+
     const response = await createProduct(convertedValues)
+
     if (response) {
-      toast("Produto criado com sucesso!", {
-        description: convertedValues.title,
-        duration: 9000,
-        action: {
-          label: "Desfazer",
-          onClick: () => {
-                deleteProduct(response.data.id)
-                toast("Um produto foi deletado.")
-                setTimeout(() => {
-                location.reload()
-                }, 1000)
-              },
-        },
-      })
-      form.reset()
-      console.log(response)
+      if (response.status === 200) {
+        toast.success("Produto criado com sucesso!", {
+          description: convertedValues.title,
+          duration: 9000,
+          action: {
+            label: "Desfazer",
+            onClick: () => {
+              deleteProduct(response.data.id)
+              toast.error("Um produto foi deletado.")
+            },
+          },
+        })
+
+        form.reset()
+        console.log(response)
+      }
     }
   }
+
 
   async function onAnalyze(event: React.MouseEvent<HTMLButtonElement>) {
     event.preventDefault()
@@ -113,7 +117,7 @@ export function FormAddProduct() {
     const response = await extractProduct(urlProductValue)
     console.log(response)
     if (response) {
-      toast("Produto extraído com sucesso!")
+      toast.info("Produto extraído com sucesso!")
       form.setValue("title", response.title || "")
       form.setValue("image", response.image || "")
       form.setValue("buyLink", urlProductValue || "")

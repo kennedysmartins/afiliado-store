@@ -241,7 +241,7 @@ export const columns: ColumnDef<Product>[] = [
             className="text-red-500"
               onClick={() => {
                 deleteProduct(productId)
-                toast("Um produto foi deletado.")
+                toast.error("Um produto foi deletado.")
                 setTimeout(() => {
                 location.reload()
                 }, 1000)
