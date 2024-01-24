@@ -134,12 +134,6 @@ export function FormEditProduct({ id }: { id: string }) {
     }
   }
 
-  function onAnalyze(event: React.MouseEvent<HTMLButtonElement>) {
-    event.preventDefault()
-    const urlProductValue = form.getValues("urlProduct")
-    console.log("Url Product Value: " + urlProductValue)
-  }
-
   return (
     <Form {...form}>
       <form
