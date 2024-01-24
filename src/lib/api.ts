@@ -71,6 +71,23 @@ export const fetchProduct = async (id: string) => {
 
   return null
 }
+
+export const extractProduct = async (url: string) => {
+  try {
+    const response = await axios.post(`${apiUrl}/extractor`, {
+      url,
+    })
+
+    if (response.status === 200) {
+      const product = response.data
+      return product
+    }
+  } catch (error) {
+    console.error("Erro ao extrair o produto", error)
+  }
+
+  return null
+}
   
 export const updateProduct = async (id: string, data: object) => {
   try {
