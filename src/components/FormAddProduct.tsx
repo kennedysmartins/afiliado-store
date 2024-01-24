@@ -90,7 +90,7 @@ async function onSubmit(values: z.infer<typeof formSchema>) {
     const response = await createProduct(convertedValues)
 
     if (response) {
-      if (response.status === 200) {
+      if (response.status === 201) {
         toast.success("Produto criado com sucesso!", {
           description: convertedValues.title,
           duration: 9000,
