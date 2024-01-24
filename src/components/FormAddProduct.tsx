@@ -82,6 +82,7 @@ export function FormAddProduct() {
       cupomValue: parseFloat(cupomValue),
       currentPrice: parseFloat(currentPrice),
       originalPrice: parseFloat(originalPrice),
+      published: true
     }
     const response = await createProduct(convertedValues)
     console.log(response)
