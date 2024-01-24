@@ -115,12 +115,13 @@ export const createProduct = async (data: object) => {
       },
     })
 
-    return response 
+    return response.data
   } catch (error) {
     console.error("Erro ao criar o produto", error)
     return false
   }
 }
+
 
 
  // const fetchCategories = async () => {
