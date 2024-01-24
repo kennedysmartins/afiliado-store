@@ -19,7 +19,7 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "./ui/textarea"
-import { createProduct, extractProduct } from "@/lib/api"
+import { createProduct, deleteProduct, extractProduct } from "@/lib/api"
 
 const formSchema = z.object({
   id: z.string(),
@@ -33,7 +33,7 @@ const formSchema = z.object({
   buyLink: z.string().min(2, {
     message: "Você precisa definir um link de encaminhamento.",
   }),
-  announcement: z.string().nullable(),
+  announcement: z.string(),
   productCode: z.string(),
   catchyText: z.string(),
   conditionPayment: z.string(),
@@ -55,7 +55,7 @@ export function FormAddProduct() {
       originalPrice: "",
       recurrencePrice: "",
       buyLink: "",
-      announcement: null,
+      announcement: "",
       productCode: "",
       catchyText: "",
       conditionPayment: "",
@@ -66,6 +66,8 @@ export function FormAddProduct() {
       urlProduct: "",
     },
   })
+
+  
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     const {
@@ -85,7 +87,20 @@ export function FormAddProduct() {
     }
     const response = await createProduct(convertedValues)
     if (response) {
-      toast("Produto criado com sucesso!")
+      toast("Produto criado com sucesso!", {
+        description: convertedValues.title,
+        duration: 9000,
+        action: {
+          label: "Desfazer",
+          onClick: () => {
+                deleteProduct(response.data.id)
+                toast("Um produto foi deletado.")
+                setTimeout(() => {
+                location.reload()
+                }, 1000)
+              },
+        },
+      })
       form.reset()
       console.log(response)
     }
@@ -101,6 +116,7 @@ export function FormAddProduct() {
       toast("Produto extraído com sucesso!")
       form.setValue("title", response.title || "")
       form.setValue("image", response.image || "")
+      form.setValue("buyLink", urlProductValue || "")
     }
   }
 
@@ -270,6 +286,21 @@ export function FormAddProduct() {
             </FormItem>
           )}
         />
+
+        <FormField
+          control={form.control}
+          name="announcement"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Anúncio</FormLabel>
+              <FormControl>
+                <Input placeholder="Essa oferta pode acabar a qualquer momento!" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
         <FormField
           control={form.control}
           name="website"
