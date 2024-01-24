@@ -16,7 +16,7 @@ export default function ProductCard({ product }: { product: Product }) {
     <div>
       <Card className="w-52 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition duration-300">
         <CardHeader className="relative">
-          <Link href="#">
+          <Link href={`/${product.id}`}>
             <img
               src={product.image}
               alt={product.title}
