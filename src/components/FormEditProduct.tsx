@@ -131,7 +131,7 @@ export function FormEditProduct({ id }: { id: string }) {
     }
     const response = await updateProduct(id, convertedValues)
     if (response) {
-      toast.sucess("Produto editado com sucesso!")
+      toast.success("Produto editado com sucesso!")
     }
   }
 
