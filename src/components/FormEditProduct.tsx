@@ -77,10 +77,10 @@ export function FormEditProduct({ id }: { id: string }) {
       // Convertendo cupomValue, currentPrice, originalPrice para string
       const updatedProduct: any = {
         ...response,
-        cupomValue: response.cupomValue.toString(),
-        currentPrice: response.currentPrice.toString(),
+        cupomValue: response.cupomValue?.toString(),
+        currentPrice: response.currentPrice?.toString(),
         recurrencePrice: response.recurrencePrice?.toString(),
-        originalPrice: response.originalPrice.toString(),
+        originalPrice: response.originalPrice?.toString(),
       }
 
 
