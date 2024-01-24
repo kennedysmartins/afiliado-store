@@ -67,14 +67,14 @@ export function AdminSidebar({ className }: { className?: string }) {
             <Link href="/admin/settings">
               <Button variant="ghost" className="w-full justify-start gap-2">
                 <MdOutlineSettings />
-                Settings
+                Configurações
               </Button>
             </Link>
           </div>
         </div>
         <div className="py-2">
           <h2 className="mb-2 text-lg font-semibold tracking-tight">
-            Products
+            Produtos
           </h2>
           <div className="space-y-1">
             <Link href="/admin/products">
