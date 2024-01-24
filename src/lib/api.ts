@@ -115,9 +115,7 @@ export const createProduct = async (data: object) => {
       },
     })
 
-    console.log(response)
-
-    return response.status === 201 // Verifica se o status é 201 (Created)
+    return response 
   } catch (error) {
     console.error("Erro ao criar o produto", error)
     return false
