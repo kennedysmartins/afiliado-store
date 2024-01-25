@@ -2,12 +2,10 @@
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
-import { Product } from "@/lib/types"
 import * as React from "react"
 import { toast } from "sonner"
 
 import { Button } from "@/components/ui/button"
-import { Separator } from "@/components/ui/separator"
 import {
   Form,
   FormControl,
@@ -18,8 +16,7 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import { Textarea } from "./ui/textarea"
-import { createProduct, fetchProduct, updateProduct } from "@/lib/api"
+import { updateProduct } from "@/lib/api"
 import { Skeleton } from "./ui/skeleton"
 
 const formSchema = z.object({
