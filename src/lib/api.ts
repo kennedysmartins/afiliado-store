@@ -231,3 +231,48 @@ export const getUser = async (
     return false
   }
 }
+
+export const getAllStoreConfigs = async () => {
+  console.log("Pegando todas as informações da loja")
+  try {
+    const response = await axios.get(`${apiUrl}/store`)
+    const storeConfigs = response.data
+    if (storeConfigs.length > 0) {
+      return storeConfigs
+    } else {
+      console.warn("A lista de configurações da loja está vazia.")
+      return null // Ou outra lógica apropriada para lidar com a lista vazia
+    }
+  } catch (error) {
+    console.error("Erro ao obter configurações da loja:", error)
+    throw error
+  }
+}
+
+export const updateStoreConfigs = async (id: string, data: object) => {
+  console.log("Atualizando configurações da loja")
+
+  try {
+    const response = await axios.put(`${apiUrl}/store/${id}`, data, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+
+    return response.status === 200
+  } catch (error) {
+    console.error("Erro ao atualizar configuração da loja:", error)
+    return false
+  }
+}
+
+export const createDefaultStoreConfigs = async () => {
+  console.log("Criando configurações padrões da loja")
+  try {
+    const response = await axios.post(`${apiUrl}/store/createDefaultConfig`)
+    return response.data
+  } catch (error) {
+    console.error("Erro ao criar configurações padrão da loja:", error)
+    throw error
+  }
+}
