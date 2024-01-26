@@ -31,3 +31,24 @@ export interface UserData {
   updatedAt: string
   token: string
 }
+
+export type StoreInfo = {
+  id: string
+  storeName: string
+  storeDescription: string | null
+  storeLogo: string | null
+  storeContact: {
+    socialFacebook: string | null
+    socialInstagram: string | null
+    socialTelegram: string | null
+    socialWhatsApp: string | null
+    address: string | null
+    phone: string | null
+    email: string | null
+  } | null
+  storeConfig: {
+    color: string | null
+    navbar: string | null
+    banners: Array<string> | null
+  } | null
+}
