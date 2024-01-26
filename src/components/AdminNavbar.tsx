@@ -1,3 +1,4 @@
+"use client"
 import Link from "next/link"
 import React from "react"
 import { ModeToggle } from "./ModeToggle"
@@ -5,6 +6,7 @@ import { cn } from "@/lib/utils"
 import { AdminSidebarMobile } from "./AdminSidebarMobile"
 
 const AdminNavbar = ({ className }: { className?: string }) => {
+
   
   return (
     <div

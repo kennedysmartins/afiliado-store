@@ -8,6 +8,7 @@ import { MdOutlineSettings, MdOutlineDashboard } from "react-icons/md"
 import { FiPackage } from "react-icons/fi"
 import { LuPackagePlus } from "react-icons/lu"
 import Link from "next/link"
+import useStoreInfo from "@/hooks/useStore"
 
 function Toggler({
   defaultExpanded = false,
@@ -22,6 +23,7 @@ function Toggler({
   }) => React.ReactNode
 }) {
   const [open, setOpen] = React.useState(defaultExpanded)
+
   return (
     <React.Fragment>
       {renderToggle({ open, setOpen })}
@@ -37,6 +39,8 @@ function Toggler({
 }
 
 export function AdminSidebar({ className }: { className?: string }) {
+  const storeInfo= useStoreInfo()
+
   return (
     <div
       className={cn(
@@ -47,9 +51,9 @@ export function AdminSidebar({ className }: { className?: string }) {
       <div className="space-y-4 py-4 px-2">
         <div className="flex items-center justify-between">
           <Link href="/">
-          <h2 className="text-lg font-semibold tracking-tight">
-            Afiliado Store
-          </h2>
+            <h2 className="text-lg font-semibold tracking-tight">
+              {storeInfo.storeName}
+            </h2>
           </Link>
           <ModeToggle />
         </div>

@@ -1,5 +1,7 @@
 "use client"
 import { createDefaultStoreConfigs, getAllStoreConfigs } from "@/lib/api"
+import { Progress } from "@/components/ui/progress"
+
 import {
   createContext,
   useContext,
@@ -14,7 +16,6 @@ type StoreInfo = {
   storeName: string
   storeDescription: string
   storeLogo: string | null
-  storeAddress: string | null
   storeContact: string | null
   storeConfig: any | null
 }
@@ -23,29 +24,37 @@ type StoreContextType = {
   storeInfo: StoreInfo | null
 }
 
-const StoreContext = createContext<StoreContextType | undefined>(undefined)
+export const StoreContext = createContext<StoreContextType | null>(null)
 
 export const StoreProvider = ({ children }: { children: ReactNode }) => {
   const [storeInfo, setStoreInfo] = useState<StoreInfo | null>(null)
-  const [isLoading, setIsLoading] = useState(true)
+  const [isLoading, setIsLoading] = useState(0)
 
   const loadStore = useCallback(async () => {
     try {
-      const info = await getAllStoreConfigs()
-      if (!info) {
+      setIsLoading(33)
+      setIsLoading(80)
+
+
+      const infoList = await getAllStoreConfigs()
+      setIsLoading(90)
+
+      if (!infoList || infoList.length === 0) {
         // Se não existir configuração, cria a configuração padrão
         await createDefaultStoreConfigs()
+        setIsLoading(90)
+
         // Obtém novamente as configurações após a criação da padrão
-        const updatedInfo = await getAllStoreConfigs()
-        if (updatedInfo) {
-          setStoreInfo(updatedInfo)
+        const updatedInfoList = await getAllStoreConfigs()
+        if (updatedInfoList && updatedInfoList.length > 0) {
+          setStoreInfo(updatedInfoList[0])
         }
       } else {
-        // Configurações existem, definir no estado
-        setStoreInfo(info)
+        setStoreInfo(infoList[0])
+        setIsLoading(90)
       }
     } finally {
-      setIsLoading(false)
+      setIsLoading(100)
     }
   }, [])
 
@@ -53,12 +62,15 @@ export const StoreProvider = ({ children }: { children: ReactNode }) => {
     loadStore()
   }, [])
 
-  if (isLoading) {
+  if (isLoading < 100) {
     return (
       <>
         <div className="flex justify-center items-center h-dvh">
-          Loading
-      </div>
+          <div className="w-1/4">
+
+          <Progress value={isLoading} />
+          </div>
+        </div>
       </>
     )
   }
@@ -68,12 +80,4 @@ export const StoreProvider = ({ children }: { children: ReactNode }) => {
       {storeInfo && children}
     </StoreContext.Provider>
   )
-}
-
-export const useStoreInfo = () => {
-  const context = useContext(StoreContext)
-  if (!context) {
-    throw new Error("useStore must be used within a StoreProvider")
-  }
-  return context.storeInfo!
 }
