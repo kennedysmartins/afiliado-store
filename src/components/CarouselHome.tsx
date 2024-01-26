@@ -8,15 +8,18 @@ import {
   CarouselContent,
   CarouselItem,
 } from "@/components/ui/carousel"
+import useStoreInfo from "@/hooks/useStore"
 
 
 
 const banners = [
-  "https://www.pincei.com.br/_next/image?url=https%3A%2F%2Fimages.pincei.co%2Fee%2F113a%2F65d6831fd1c86adf4f212fee975cc4ed9d&w=3840&q=75",
-  "https://www.pincei.com.br/_next/image?url=https%3A%2F%2Fimages.pincei.co%2Fd6%2F86b6%2F6841edb799dfac80d5925edb816519c241&w=3840&q=75",
+  "/banner1.png",
+  "/banner2.png",
+  "/banner3.png",
 ]
 
 export function CarouselHome() {
+  const storeInfo = useStoreInfo()
   const plugin = React.useRef(
     Autoplay({ delay: 5000, stopOnInteraction: true })
   )
