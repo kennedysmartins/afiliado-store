@@ -4,9 +4,12 @@ import * as React from "react"
 import { fetchProducts, searchProducts } from "@/lib/api"
 import ProductCard from "@/components/ProductCard"
 import { Product } from "@/lib/types"
+import { cn } from "@/lib/utils"
 
 // Componente funcional ProductList
-const ProductList = ({ limit = 0 }) => {
+const ProductList = (
+  { className, limit = 0 }: { className?: string, limit?: number }
+) => {
   // Estado para armazenar os produtos da pesquisa
   const [products, setProducts] = React.useState<Product[]>([])
 
@@ -32,7 +35,12 @@ const ProductList = ({ limit = 0 }) => {
 
   // Renderiza o componente
   return (
-    <div className="flex flex-col flex-wrap justify-center items-center align-middle gap-3 sm:w-2/3 mx-auto sm:flex-row">
+    <div
+      className={cn(
+        "flex flex-col flex-wrap justify-center items-center align-middle gap-3 sm:w-2/3 mx-auto sm:flex-row",
+        className
+      )}
+    >
       {products.slice(0, limit > 0 ? limit : products.length).map((product) => (
         <ProductCard key={product.customId} product={product} />
       ))}

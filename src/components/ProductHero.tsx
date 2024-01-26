@@ -35,7 +35,7 @@ const ProductHero = ({ id }: { id: string }) => {
     fetchProductAPI()
   }, [fetchProductAPI])
   return (
-    <div className="flex flex-col flex-wrap justify-center items-center align-middle gap-3 sm:w-2/3 mx-auto">
+    <div className="flex flex-col w-full justify-center items-center align-middle gap-3 sm:w-2/3 mx-auto">
       {product && (
         <div className="flex flex-col justify-center items-center gap-10">
           <Card className="w-full overflow-hidden transition duration-300 border-none">
@@ -71,15 +71,17 @@ const ProductHero = ({ id }: { id: string }) => {
               </CardContent>
             </div>
           </Card>
-          <div className="flex flex-col align-middle justify-center gap-3 container">
+          <div className="flex flex-col align-middle justify-center gap-3 container flex-nowrap">
             <h2 className="text-center">Últimas Promoções</h2>
-            <ProductList limit={3} />
+            <ProductList limit={3} className="flex-nowrap" />
+
           </div>
         </div>
       )}
     </div>
   )
 }
+
 
 
 export default ProductHero
