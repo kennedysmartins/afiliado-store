@@ -50,5 +50,6 @@ export type StoreInfo = {
     color: string | null
     navbar: string | null
     banners: Array<string> | null
+    mobileBanners: Array<string> | null
   } | null
 }

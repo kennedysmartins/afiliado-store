@@ -10,8 +10,7 @@ import {
 } from "@/components/ui/carousel"
 import useStoreInfo from "@/hooks/useStore"
 
-
-export function CarouselHome() {
+export function CarouselHomeMobile() {
   const storeInfo = useStoreInfo()
   const plugin = React.useRef(
     Autoplay({ delay: 5000, stopOnInteraction: true })
@@ -19,19 +18,15 @@ export function CarouselHome() {
   return (
     <Carousel
       plugins={[plugin.current]}
-      className="w-full sm:h-[450px] mb-10 h-44 justify-center items-center md:block hidden"
+      className="md:hidden"
       onMouseEnter={plugin.current.stop}
       onMouseLeave={plugin.current.reset}
     >
       <CarouselContent>
-        {storeInfo?.storeConfig?.banners?.map((banner, index) => (
+        {storeInfo?.storeConfig?.mobileBanners?.map((banner, index) => (
           <CarouselItem key={index}>
-            <div className="p-1">
-              <Card>
-                <CardContent className="flex items-center justify-center p-6 border-primary-foreground shadow-md">
-                  <img src={banner} className="rounded" />
-                </CardContent>
-              </Card>
+            <div>
+                  <img src={banner} className="w-full h-80 object-cover" />
             </div>
           </CarouselItem>
         ))}

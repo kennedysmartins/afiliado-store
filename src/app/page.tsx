@@ -1,5 +1,6 @@
 import AnnouncementCard from "@/components/AnnouncementCard"
 import { CarouselHome } from "@/components/CarouselHome"
+import { CarouselHomeMobile } from "@/components/CarouselHomeMobile"
 import Navbar from "@/components/Navbar"
 import ProductList from "@/components/ProductList"
 
@@ -7,6 +8,7 @@ export default function Home() {
   return (
     <>
       <Navbar />
+          <CarouselHomeMobile />
       <main className="flex flex-col mx-auto text-2xl gap-2 my-10 w-[80%] items-center justify-center">
         <div className="md:container flex justify-center items-center mx-4">
           <CarouselHome />

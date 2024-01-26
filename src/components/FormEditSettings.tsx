@@ -37,6 +37,7 @@ const formSchema = z.object({
   storeConfig: z.object({
     color: z.string(),
     banners: z.tuple([z.string(), z.string(), z.string()]),
+    mobileBanners: z.tuple([z.string(), z.string(), z.string()]),
   }),
 })
 
@@ -56,7 +57,8 @@ export function FormEditSettings() {
       },
       storeConfig: {
         banners: ["", "", ""],
-        color:"",
+        mobileBanners: ["", "", ""],
+        color: "",
       },
     },
   })
@@ -78,6 +80,11 @@ export function FormEditSettings() {
           storeInfo?.storeConfig?.banners?.[0] || "",
           storeInfo?.storeConfig?.banners?.[1] || "",
           storeInfo?.storeConfig?.banners?.[2] || "",
+        ])
+        form.setValue("storeConfig.mobileBanners", [
+          storeInfo?.storeConfig?.mobileBanners?.[0] || "",
+          storeInfo?.storeConfig?.mobileBanners?.[1] || "",
+          storeInfo?.storeConfig?.mobileBanners?.[2] || "",
         ])
 
         form.setValue("storeLogo", storeInfo.storeLogo || "")
@@ -407,6 +414,68 @@ export function FormEditSettings() {
           <FormField
             control={form.control}
             name="storeConfig.banners.2"
+            render={({ field }) => (
+              <FormItem className="w-full">
+                <FormLabel> </FormLabel>
+                {storeInfo.id ? (
+                  <>
+                    <FormControl>
+                      <Input {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </>
+                ) : (
+                  <Skeleton className="w-full h-10" />
+                )}
+              </FormItem>
+            )}
+          />
+        </div>
+
+        <div className="flex w-full justify-between gap-2">
+          <FormField
+            control={form.control}
+            name="storeConfig.mobileBanners.0"
+            render={({ field }) => (
+              <FormItem className="w-full">
+                <FormLabel>Mobile Banner</FormLabel>
+                {storeInfo.id ? (
+                  <>
+                    <FormControl>
+                      <Input {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </>
+                ) : (
+                  <Skeleton className="w-full h-10" />
+                )}
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="storeConfig.mobileBanners.1"
+            render={({ field }) => (
+              <FormItem className="w-full">
+                <FormLabel> </FormLabel>
+                {storeInfo.id ? (
+                  <>
+                    <FormControl>
+                      <Input {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </>
+                ) : (
+                  <Skeleton className="w-full h-10" />
+                )}
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="storeConfig.mobileBanners.2"
             render={({ field }) => (
               <FormItem className="w-full">
                 <FormLabel> </FormLabel>

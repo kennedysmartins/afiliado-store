@@ -4,8 +4,7 @@ import * as React from "react"
 import { useSearchParams } from "next/navigation"
 import { searchProducts } from "@/lib/api"
 import ProductCard from "@/components/ProductCard"
-import {Product} from "@/lib/types"
-
+import { Product } from "@/lib/types"
 
 // Componente funcional SearchList
 const SearchList = () => {
@@ -32,7 +31,7 @@ const SearchList = () => {
       setProducts([])
       return []
     }
-  },[]);
+  }, [])
 
   // Efeito para acionar a pesquisa quando o termo de pesquisa é alterado
   React.useEffect(() => {
@@ -42,7 +41,9 @@ const SearchList = () => {
   // Renderiza o componente
   return (
     <div>
-      <p>Pesquisando por: {term}</p>
+      <p>
+        Pesquisando por: <span className="text-primary">{term}</span>
+      </p>
       <div className="my-11 flex flex-wrap gap-3">
         {products.map((product) => (
           <ProductCard key={product.customId} product={product} />

@@ -44,7 +44,10 @@ export const StoreProvider = ({ children }: { children: ReactNode }) => {
         }
       } else {
         setStoreInfo(infoList[0])
-        if(theme == "none") {
+        if (
+          theme !== `${infoList[0].storeConfig.color}-dark` ||
+          theme !== `${infoList[0].storeConfig.color}`
+        ) {
           setTheme(infoList[0].storeConfig.color)
         }
 
