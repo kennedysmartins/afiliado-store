@@ -233,7 +233,6 @@ export const getUser = async (
 }
 
 export const getAllStoreConfigs = async () => {
-  console.log("Pegando todas as informações da loja")
   try {
     const response = await axios.get(`${apiUrl}/store`)
     const storeConfigs = response.data
