@@ -186,7 +186,6 @@ export function FormEditSettings() {
             </FormItem>
           )}
         />
- 
 
         <FormField
           control={form.control}
@@ -194,13 +193,11 @@ export function FormEditSettings() {
           render={({ field }) => (
             <FormItem className="space-y-1">
               <FormLabel>Tema</FormLabel>
-              <FormDescription>
-                Selecione um tema para o site.
-              </FormDescription>
+              <FormDescription>Selecione um tema para o site.</FormDescription>
               <FormMessage />
               <RadioGroup
                 onValueChange={field.onChange}
-                defaultValue={field.value}
+                {...field}
                 className="grid max-w-md grid-cols-2 gap-8 pt-2"
               >
                 <FormItem>
@@ -229,7 +226,7 @@ export function FormEditSettings() {
                     </span>
                   </FormLabel>
                 </FormItem>
-                
+
                 <FormItem>
                   <FormLabel className="[&:has([data-state=checked])>div]:border-primary">
                     <FormControl>
@@ -361,9 +358,6 @@ export function FormEditSettings() {
                     </span>
                   </FormLabel>
                 </FormItem>
-
-                
-
               </RadioGroup>
             </FormItem>
           )}
