@@ -7,7 +7,9 @@ const Products = async () => {
   return (
     <main className="mx-2 sm:mx-10 w-full text-2xl gap-2 my-10">
       <div className="flex justify-between">
-        <h2 className="text-3xl font-bold tracking-tight">Produtos</h2>
+        <h2 className="text-3xl font-bold tracking-tight text-primary">
+          Produtos
+        </h2>
         <Button asChild>
           <Link href="/admin/products/create">Novo</Link>
         </Button>

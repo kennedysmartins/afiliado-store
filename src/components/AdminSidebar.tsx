@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button"
 import Search from "@/components/Search"
 import { ModeToggle } from "./ModeToggle"
 import { MdOutlineSettings, MdOutlineDashboard } from "react-icons/md"
-import { FiPackage } from "react-icons/fi"
+import { FiLogOut, FiPackage, FiUser } from "react-icons/fi"
 import { LuPackagePlus } from "react-icons/lu"
 import Link from "next/link"
 import useStoreInfo from "@/hooks/useStore"
@@ -59,18 +59,18 @@ export function AdminSidebar({ className }: { className?: string }) {
         </div>
         <Search className="lg:w-full" />
         <div className="py-2">
-          <h2 className="mb-2 text-lg font-semibold tracking-tight">Admin</h2>
+          <h2 className="mb-2 text-lg font-semibold tracking-tight ">Admin</h2>
           <div className="space-y-1">
             <Link href="/admin">
               <Button variant="ghost" className="w-full justify-start gap-2">
-                <MdOutlineDashboard />
+                <MdOutlineDashboard className="text-primary" />
                 Dashboard
               </Button>
             </Link>
 
             <Link href="/admin/settings">
               <Button variant="ghost" className="w-full justify-start gap-2">
-                <MdOutlineSettings />
+                <MdOutlineSettings className="text-primary" />
                 Configurações
               </Button>
             </Link>
@@ -83,15 +83,36 @@ export function AdminSidebar({ className }: { className?: string }) {
           <div className="space-y-1">
             <Link href="/admin/products">
               <Button variant="ghost" className="w-full justify-start gap-2">
-                <FiPackage />
+                <FiPackage className="text-primary" />
                 Todos os produtos
               </Button>
             </Link>
 
             <Link href="/admin/products/create">
               <Button variant="ghost" className="w-full justify-start gap-2">
-                <LuPackagePlus />
+                <LuPackagePlus className="text-primary" />
                 Criar produto
+              </Button>
+            </Link>
+          </div>
+        </div>
+
+        <div className="py-2">
+          <h2 className="mb-2 text-lg font-semibold tracking-tight">
+            Usuário
+          </h2>
+          <div className="space-y-1">
+            <Link href="/admin/products">
+              <Button variant="ghost" className="w-full justify-start gap-2">
+                <FiUser className="text-primary" />
+                Meu Perfil
+              </Button>
+            </Link>
+
+            <Link href="/admin/products/create">
+              <Button variant="ghost" className="w-full justify-start gap-2">
+                <FiLogOut className="text-primary" />
+                Deslogar
               </Button>
             </Link>
           </div>

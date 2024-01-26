@@ -13,7 +13,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet"
-import { FiMenu } from "react-icons/fi"
+import { FiLogOut, FiMenu, FiUser } from "react-icons/fi"
 import Search from "@/components/Search"
 import { LuPackagePlus } from "react-icons/lu"
 import { MdOutlineSettings, MdOutlineDashboard } from "react-icons/md"
@@ -32,7 +32,7 @@ export function AdminSidebarMobile() {
     <Sheet>
       <SheetTrigger>
         <Button variant="ghost" size="icon">
-          <FiMenu />
+          <FiMenu className="text-primary" />
         </Button>
       </SheetTrigger>
       <SheetContent side="left">
@@ -51,14 +51,14 @@ export function AdminSidebarMobile() {
             <div className="space-y-1">
               <Link href="/admin">
                 <Button variant="ghost" className="w-full justify-start gap-2">
-                  <MdOutlineDashboard />
+                  <MdOutlineDashboard className="text-primary" />
                   Dashboard
                 </Button>
               </Link>
 
               <Link href="/admin/settings">
                 <Button variant="ghost" className="w-full justify-start gap-2">
-                  <MdOutlineSettings />
+                  <MdOutlineSettings className="text-primary" />
                   Configurações
                 </Button>
               </Link>
@@ -71,15 +71,36 @@ export function AdminSidebarMobile() {
             <div className="space-y-1">
               <Link href="/admin/products">
                 <Button variant="ghost" className="w-full justify-start gap-2">
-                  <FiPackage />
+                  <FiPackage className="text-primary" />
                   Todos os produtos
                 </Button>
               </Link>
 
               <Link href="/admin/products/create">
                 <Button variant="ghost" className="w-full justify-start gap-2">
-                  <LuPackagePlus />
+                  <LuPackagePlus className="text-primary" />
                   Criar produto
+                </Button>
+              </Link>
+            </div>
+          </div>
+
+          <div className="py-2">
+            <h2 className="mb-2 text-lg font-semibold tracking-tight">
+              Usuário
+            </h2>
+            <div className="space-y-1">
+              <Link href="/admin/products">
+                <Button variant="ghost" className="w-full justify-start gap-2">
+                  <FiUser className="text-primary" />
+                  Meu Perfil
+                </Button>
+              </Link>
+
+              <Link href="/admin/products/create">
+                <Button variant="ghost" className="w-full justify-start gap-2">
+                  <FiLogOut className="text-primary" />
+                  Deslogar
                 </Button>
               </Link>
             </div>

@@ -15,7 +15,7 @@ import { formatCurrency } from "@/lib/utils"
 export default function ProductCard({ product }: { product: Product }) {
   return (
     <div>
-      <Card className="lg:w-52 w-full rounded-lg overflow-hidden shadow-md hover:shadow-lg transition duration-300">
+      <Card className="lg:w-52 w-full rounded-lg overflow-hidden shadow-md hover:shadow-lg transition duration-300 ">
         <div className="flex lg:flex-col w-full">
           <CardHeader className="relative w-1/2 lg:w-full">
             <Link href={`/${product.customId}`}>
@@ -37,7 +37,7 @@ export default function ProductCard({ product }: { product: Product }) {
               <p className="text-sm line-through opacity-55 h-4 ">{`R$ ${formatCurrency(
                 product.originalPrice
               )}`}</p>
-              <p className="md:font-medium mb-2 h-8 ">{`R$ ${formatCurrency(
+              <p className="md:font-medium mb-2 h-8 text-primary ">{`R$ ${formatCurrency(
                 product.currentPrice
               )}`}</p>
             </Link>

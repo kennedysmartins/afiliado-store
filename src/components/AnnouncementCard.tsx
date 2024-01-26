@@ -22,7 +22,7 @@ export default function AnnouncementCard({data}:cardType) {
   const { cardTitle, description, footer } = data
   return (
     <div>
-      <Card className="w-72 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition duration-300">
+      <Card className="w-72 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition duration-300  ">
         <CardContent className="p-4">
           <CardTitle className="text-xl font-semibold mb-2 text-center">
             {cardTitle}

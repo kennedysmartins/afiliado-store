@@ -22,7 +22,7 @@ export function ModeToggle() {
             onClick={() => {
               setTheme("green-dark")
             }}
-            className="h-[1.2rem] w-[1.2rem] "
+            className="h-[1.2rem] w-[1.2rem] text-primary"
           />
         )}
         {theme == "green-dark" && (
@@ -33,7 +33,7 @@ export function ModeToggle() {
                 window.location.reload()
               }, 500)
             }}
-            className="absolute h-[1.2rem] w-[1.2rem] "
+            className="absolute h-[1.2rem] w-[1.2rem] text-primary"
           />
         )}
         <span className="sr-only">Toggle theme</span>
@@ -48,7 +48,7 @@ export function ModeToggle() {
             onClick={() => {
               setTheme("red-dark")
             }}
-            className="h-[1.2rem] w-[1.2rem] "
+            className="h-[1.2rem] w-[1.2rem] text-primary"
           />
         )}
         {theme == "red-dark" && (
@@ -59,7 +59,7 @@ export function ModeToggle() {
                 window.location.reload()
               }, 500)
             }}
-            className="absolute h-[1.2rem] w-[1.2rem] "
+            className="absolute h-[1.2rem] w-[1.2rem] text-primary"
           />
         )}
         <span className="sr-only">Toggle theme</span>
@@ -74,7 +74,7 @@ export function ModeToggle() {
             onClick={() => {
               setTheme("blue-dark")
             }}
-            className="h-[1.2rem] w-[1.2rem] "
+            className="h-[1.2rem] w-[1.2rem] text-primary"
           />
         )}
         {theme == "blue-dark" && (
@@ -85,7 +85,7 @@ export function ModeToggle() {
                 window.location.reload()
               }, 500)
             }}
-            className="absolute h-[1.2rem] w-[1.2rem] "
+            className="absolute h-[1.2rem] w-[1.2rem] text-primary"
           />
         )}
         <span className="sr-only">Toggle theme</span>
@@ -100,7 +100,7 @@ export function ModeToggle() {
             onClick={() => {
               setTheme("yellow-dark")
             }}
-            className="h-[1.2rem] w-[1.2rem] "
+            className="h-[1.2rem] w-[1.2rem] text-primary"
           />
         )}
         {theme == "yellow-dark" && (
@@ -111,7 +111,7 @@ export function ModeToggle() {
                 window.location.reload()
               }, 500)
             }}
-            className="absolute h-[1.2rem] w-[1.2rem] "
+            className="absolute h-[1.2rem] w-[1.2rem] text-primary"
           />
         )}
         <span className="sr-only">Toggle theme</span>
@@ -126,7 +126,7 @@ export function ModeToggle() {
             onClick={() => {
               setTheme("rose-dark")
             }}
-            className="h-[1.2rem] w-[1.2rem] "
+            className="h-[1.2rem] w-[1.2rem] text-primary"
           />
         )}
         {theme == "rose-dark" && (
@@ -137,7 +137,7 @@ export function ModeToggle() {
                 window.location.reload()
               }, 500)
             }}
-            className="absolute h-[1.2rem] w-[1.2rem] "
+            className="absolute h-[1.2rem] w-[1.2rem] text-primary"
           />
         )}
         <span className="sr-only">Toggle theme</span>
@@ -152,7 +152,7 @@ export function ModeToggle() {
             onClick={() => {
               setTheme("violet-dark")
             }}
-            className="h-[1.2rem] w-[1.2rem] "
+            className="h-[1.2rem] w-[1.2rem] text-primary"
           />
         )}
         {theme == "violet-dark" && (
@@ -163,7 +163,7 @@ export function ModeToggle() {
                 window.location.reload()
               }, 500)
             }}
-            className="absolute h-[1.2rem] w-[1.2rem] "
+            className="absolute h-[1.2rem] w-[1.2rem] text-primary"
           />
         )}
         <span className="sr-only">Toggle theme</span>
@@ -178,7 +178,7 @@ export function ModeToggle() {
             onClick={() => {
               setTheme("zinc-dark")
             }}
-            className="h-[1.2rem] w-[1.2rem] "
+            className="h-[1.2rem] w-[1.2rem] text-primary"
           />
         )}
         {theme == "zinc-dark" && (
@@ -189,7 +189,7 @@ export function ModeToggle() {
                 window.location.reload()
               }, 500)
             }}
-            className="absolute h-[1.2rem] w-[1.2rem] "
+            className="absolute h-[1.2rem] w-[1.2rem] text-primary"
           />
         )}
         <span className="sr-only">Toggle theme</span>
@@ -201,11 +201,11 @@ export function ModeToggle() {
     <Button variant="outline" size="icon">
       <Sun
         onClick={() => setTheme("dark")}
-        className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0"
+        className="h-[1.2rem] w-[1.2rem] text-primaryrotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0"
       />
       <Moon
         onClick={() => setTheme("light")}
-        className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100"
+        className="absolute h-[1.2rem] w-[1.2rem] text-primaryrotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100"
       />
       <span className="sr-only">Toggle theme</span>
     </Button>
