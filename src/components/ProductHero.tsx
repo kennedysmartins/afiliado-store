@@ -41,7 +41,7 @@ const ProductHero = ({ id }: { id: string }) => {
           <Card className="w-full overflow-hidden transition duration-300 border-none">
             <div className="flex w-full border-none">
               <CardHeader className="relative w-1/2 lg:w-full">
-                <Link href={`${product.buyLink}`}>
+                <Link href={`${product.buyLink}`} target="_blank">
                   <img
                     src={product.image}
                     alt={product.title}
@@ -50,7 +50,7 @@ const ProductHero = ({ id }: { id: string }) => {
                 </Link>
               </CardHeader>
               <CardContent className="p-4 w-1/2 lg:w-full ">
-                <Link href={`${product.buyLink}`}>
+                <Link href={`${product.buyLink}`} target="_blank">
                   <CardTitle className="text-sm font-semibold mb-2 overflow-hidden">
                     {product.title}
                   </CardTitle>
@@ -65,7 +65,7 @@ const ProductHero = ({ id }: { id: string }) => {
                   )}`}</p>
                 </Link>
 
-                <Link href={`${product.buyLink}`}>
+                <Link href={`${product.buyLink}`} target="_blank">
                   <Button className="mt-2">Pegar promoção</Button>
                 </Link>
               </CardContent>
@@ -74,7 +74,6 @@ const ProductHero = ({ id }: { id: string }) => {
           <div className="flex flex-col align-middle justify-center gap-3 container flex-nowrap">
             <h2 className="text-center">Últimas Promoções</h2>
             <ProductList limit={3} className="flex-nowrap" />
-
           </div>
         </div>
       )}
