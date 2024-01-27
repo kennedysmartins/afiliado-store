@@ -10,8 +10,6 @@ export default async function middleware(request: NextRequest) {
   const signInURL = new URL("/auth", request.url)
   const dashboardURL = new URL("/admin", request.url)
 
-  const idRouteRegex = /^\/\d+$/ // Expressão regular para IDs numéricos
-
   if (!token) {
     if (request.nextUrl.pathname == "/auth") {
       return NextResponse.next()

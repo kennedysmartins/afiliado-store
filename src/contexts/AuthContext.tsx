@@ -8,7 +8,7 @@ import React, {
 } from "react"
 
 interface AuthContextType {
-  userInfo: Record<string, unknown> | null
+  userInfo: any | null
   login: (userData: Record<string, unknown>) => void
   logout: () => void
 }
@@ -45,6 +45,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
             maxAge: 60 * 60 * 24 * 365,
             sameSite: "strict",
             secure: true,
+            httpOnly: true,
           }
           document.cookie = `token=${userInfo.token};${options.path};Max-Age=${options.maxAge};SameSite=${options.sameSite};Secure=${options.secure}`
         }
