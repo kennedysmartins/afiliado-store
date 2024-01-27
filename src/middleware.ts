@@ -7,14 +7,8 @@ export default async function middleware(request: NextRequest) {
     request.cookies.get("next-auth.session-token")?.value ||
     request.cookies.get("token")?.value
 
-    
-    
-
-
   const signInURL = new URL("/auth", request.url)
   const dashboardURL = new URL("/admin", request.url)
-
-  console.log(token)
 
   const idRouteRegex = /^\/\d+$/ // Expressão regular para IDs numéricos
 
