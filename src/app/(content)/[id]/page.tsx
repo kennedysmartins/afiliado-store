@@ -1,7 +1,38 @@
-import { CarouselHome } from "@/components/CarouselHome"
 import Navbar from "@/components/Navbar"
-import ProductCard from "@/components/ProductCard"
 import ProductHero from "@/components/ProductHero"
+import { fetchProduct } from "@/lib/api"
+import { Metadata, Product } from "@/lib/types"
+import { ResolvingMetadata } from "next"
+
+type Params = {
+  params: { id: any } // Corrigido de Number para number
+  id: any
+}
+
+type Props = {
+  params: Params
+  searchParams: string
+}
+
+export async function generateMetadata(
+  { params, searchParams }: Props,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  const id = params.id
+  const product: Product | null = await fetchProduct(id)
+
+  return {
+    openGraph: {
+      title: product?.title || "Título Indisponível",
+      description: "As melhores promoções e ofertas",
+      images: [{ url: product?.image! }],
+      locale: "pt_BR",
+      type: "website",
+      url: "",
+      siteName: ""
+    },
+  }
+}
 
 export default function ProductPage({ params }: { params: { id: string } }) {
   const id:string = params.id
