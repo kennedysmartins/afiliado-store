@@ -8,6 +8,7 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import { Button } from "./ui/button"
+import Link from "next/link"
 
 //create type data structure
 type cardType = {
@@ -15,11 +16,12 @@ type cardType = {
     cardTitle: string
     description: string
     footer: string
+    url: string
   }
 }
 
 export default function AnnouncementCard({data}:cardType) {
-  const { cardTitle, description, footer } = data
+  const { cardTitle, description, footer, url } = data
   return (
     <div>
       <Card className="w-72 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition duration-300  ">
@@ -32,7 +34,9 @@ export default function AnnouncementCard({data}:cardType) {
           </CardDescription>
         </CardContent>
         <CardFooter className="p-4 flex justify-center items-center">
+          <Link href={url} target="_blank">
           <Button>{footer}</Button>
+          </Link> 
         </CardFooter>
       </Card>
     </div>
