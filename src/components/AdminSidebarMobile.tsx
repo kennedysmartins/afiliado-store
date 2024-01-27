@@ -21,12 +21,14 @@ import { FiPackage } from "react-icons/fi"
 import Link from "next/link"
 import { ModeToggle } from "./ModeToggle"
 import useStoreInfo from "@/hooks/useStore"
-
-
-
+import useAuthInfo from "@/hooks/useAuth"
+import { useRouter } from "next/navigation"
 
 export function AdminSidebarMobile() {
   const storeInfo = useStoreInfo()
+  const AuthContext = useAuthInfo()
+  const { logout } = AuthContext
+  const router = useRouter()
 
   return (
     <Sheet>
@@ -97,12 +99,17 @@ export function AdminSidebarMobile() {
                 </Button>
               </Link>
 
-              <Link href="/admin/products/create">
-                <Button variant="ghost" className="w-full justify-start gap-2">
-                  <FiLogOut className="text-primary" />
-                  Deslogar
-                </Button>
-              </Link>
+              <Button
+                onClick={() => {
+                  logout()
+                  router.push("/auth")
+                }}
+                variant="ghost"
+                className="w-full justify-start gap-2"
+              >
+                <FiLogOut className="text-primary" />
+                Deslogar
+              </Button>
             </div>
           </div>
         </div>

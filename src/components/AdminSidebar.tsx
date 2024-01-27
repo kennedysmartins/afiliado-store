@@ -9,6 +9,8 @@ import { FiLogOut, FiPackage, FiUser } from "react-icons/fi"
 import { LuPackagePlus } from "react-icons/lu"
 import Link from "next/link"
 import useStoreInfo from "@/hooks/useStore"
+import useAuthInfo from "@/hooks/useAuth"
+import { useRouter } from "next/navigation"
 
 function Toggler({
   defaultExpanded = false,
@@ -40,6 +42,9 @@ function Toggler({
 
 export function AdminSidebar({ className }: { className?: string }) {
   const storeInfo= useStoreInfo()
+  const AuthContext = useAuthInfo()
+   const router = useRouter()
+  const { logout } = AuthContext
 
   return (
     <div
@@ -98,9 +103,7 @@ export function AdminSidebar({ className }: { className?: string }) {
         </div>
 
         <div className="py-2">
-          <h2 className="mb-2 text-lg font-semibold tracking-tight">
-            Usuário
-          </h2>
+          <h2 className="mb-2 text-lg font-semibold tracking-tight">Usuário</h2>
           <div className="space-y-1">
             <Link href="/admin/products">
               <Button variant="ghost" className="w-full justify-start gap-2">
@@ -109,12 +112,17 @@ export function AdminSidebar({ className }: { className?: string }) {
               </Button>
             </Link>
 
-            <Link href="/admin/products/create">
-              <Button variant="ghost" className="w-full justify-start gap-2">
-                <FiLogOut className="text-primary" />
-                Deslogar
-              </Button>
-            </Link>
+            <Button
+              onClick={() => {
+                logout()
+                router.push("/auth")
+              }}
+              variant="ghost"
+              className="w-full justify-start gap-2"
+            >
+              <FiLogOut className="text-primary" />
+              Deslogar
+            </Button>
           </div>
         </div>
       </div>

@@ -53,3 +53,16 @@ export type StoreInfo = {
     mobileBanners: Array<string> | null
   } | null
 }
+
+export type Metadata = {
+  openGraph: {
+    title: string
+    description: string
+    url: string
+    siteName: string
+    images: Array<{ url: string }>
+    locale: string
+    type: string
+  }
+}
+

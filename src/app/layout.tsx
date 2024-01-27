@@ -3,13 +3,14 @@ import { ThemeProvider } from "@/contexts/ThemeProvider"
 import "./globals.css"
 import { Toaster } from "@/components/ui/sonner"
 import { StoreProvider } from "@/contexts/StoreContext"
+import { AuthProvider } from "@/contexts/AuthContext"
 
 export const metadata: Metadata = {
   title: "Afiliado Store",
   description: "As melhores promoções você encontra aqui!",
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode
@@ -17,12 +18,14 @@ export default function RootLayout({
   return (
     <html suppressHydrationWarning lang="pt-br">
       <body>
-        <ThemeProvider attribute="class" defaultTheme="none">
-          <StoreProvider>
-            {children}
-            <Toaster />
-          </StoreProvider>
-        </ThemeProvider>
+        <AuthProvider>
+            <ThemeProvider attribute="class" defaultTheme="none">
+              <StoreProvider>
+                {children}
+                <Toaster />
+              </StoreProvider>
+            </ThemeProvider>
+        </AuthProvider>
       </body>
     </html>
   )

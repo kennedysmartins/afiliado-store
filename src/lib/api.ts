@@ -9,8 +9,8 @@ export const fetchProducts = async () => {
   try {
     const response = await axios.get(`${apiUrl}/products`)
     return response.data
-  } catch (error) {
-    console.error("Erro ao obter produtos:", error)
+  } catch (error:any) {
+    console.error("Erro ao obter produtos:", error.message)
     throw error // Você pode tratar o erro de outra maneira, se preferir.
   }
 }
@@ -26,9 +26,9 @@ export const deleteProduct = async (productId: string) => {
       // Trate os erros, se necessário
       return false
     }
-  } catch (error) {
+  } catch (error:any) {
     // Trate os erros de rede ou outras exceções, se necessário
-    console.error("Erro ao excluir produto:", error)
+    console.error("Erro ao excluir produto:", error.message)
     return false // Você pode tratar o erro de outra maneira, se preferir.
   }
 }
@@ -49,8 +49,8 @@ export const searchProducts = async (searchTerm: string) => {
     }
 
     return []
-  } catch (error) {
-    console.error("Erro ao buscar produtos", error)
+  } catch (error:any) {
+    console.error("Erro ao buscar produtos", error.message)
     return []
   }
 }
@@ -65,8 +65,8 @@ export const fetchProduct = async (id: string) => {
       const product = response.data
       return product
     }
-  } catch (error) {
-    console.error("Erro ao buscar o produto", error)
+  } catch (error:any) {
+    console.error("Erro ao buscar o produto", error.message)
   }
 
   return null
@@ -82,8 +82,8 @@ export const extractProduct = async (url: string) => {
       const product = response.data
       return product
     }
-  } catch (error) {
-    console.error("Erro ao extrair o produto", error)
+  } catch (error:any) {
+    console.error("Erro ao extrair o produto", error.message)
   }
 
   return null
@@ -99,8 +99,8 @@ export const updateProduct = async (id: string, data: object) => {
     })
 
     return response.status === 200
-  } catch (error) {
-    console.error("Erro ao atualizar o produto", error)
+  } catch (error:any) {
+    console.error("Erro ao atualizar o produto", error.message)
     return false
   }
 }
@@ -116,9 +116,26 @@ export const createProduct = async (data: object) => {
     })
 
     return response.data
-  } catch (error) {
-    console.error("Erro ao criar o produto", error)
+  } catch (error:any) {
+    console.error("Erro ao criar o produto", error.message)
     return false
+  }
+}
+
+export const createUser = async (data: object) => {
+  console.log("Registrando usuário")
+
+  try {
+    const response = await axios.post(`${apiUrl}/users`, data, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+
+    return response.data
+  } catch (error:any) {
+    console.error("Erro ao criar o usuário", error.message)
+    return error.message
   }
 }
 
@@ -129,8 +146,8 @@ export const createProduct = async (data: object) => {
 //     const response = await fetch(`${apiUrl}/categories`);
 //     const categories = await response.json();
 //     return categories;
-//   } catch (error) {
-//     console.error('Erro ao buscar categorias', error);
+//   } catch (error:any) {
+//     console.error('Erro ao buscar categorias', error.message);
 //     return [];
 //   }
 // };
@@ -148,7 +165,7 @@ export const createProduct = async (data: object) => {
 //       // Trate os erros, se necessário
 //       return false;
 //     }
-//   } catch (error) {
+//   } catch (error:any) {
 //     // Trate os erros de rede ou outras exceções, se necessário
 //     return false;
 //   }
@@ -159,8 +176,8 @@ export const createProduct = async (data: object) => {
 //     const response = await fetch(`${apiUrl}/categories/categoriesOrderByName`);
 //     const categories = await response.json();
 //     return categories;
-//   } catch (error) {
-//     console.error('Erro ao buscar categorias', error);
+//   } catch (error:any) {
+//     console.error('Erro ao buscar categorias', error.message);
 //     return [];
 //   }
 // };
@@ -171,7 +188,7 @@ export const createProduct = async (data: object) => {
 //     const response = await fetch(`${apiUrl}/products/paginated?page=${page}&pageSize=${pageSize}`);
 //     const productsData = await response.json();
 //     return productsData;
-//   } catch (error) {
+//   } catch (error:any) {
 //     throw new Error('Erro ao obter produtos paginados. Detalhes: ' + error.message);
 //   }
 // };
@@ -200,8 +217,8 @@ export const authUser = async (
 
     const responseData: ResponseData = response.data
     return responseData
-  } catch (error) {
-    console.error("Erro ao logar", error)
+  } catch (error:any) {
+    console.error("Erro ao logar", error.message)
     return false
   }
 }
@@ -226,8 +243,8 @@ export const getUser = async (
 
     const responseData: UserData = response.data
     return responseData
-  } catch (error) {
-    console.error("Erro ao obter usuário", error)
+  } catch (error:any) {
+    console.error("Erro ao obter usuário", error.message)
     return false
   }
 }
@@ -242,8 +259,8 @@ export const getAllStoreConfigs = async () => {
       console.warn("A lista de configurações da loja está vazia.")
       return null // Ou outra lógica apropriada para lidar com a lista vazia
     }
-  } catch (error) {
-    console.error("Erro ao obter configurações da loja:", error)
+  } catch (error:any) {
+    console.error("Erro ao obter configurações da loja:", error.message)
     throw error
   }
 }
@@ -259,8 +276,8 @@ export const updateStoreConfigs = async (id: string, data: object) => {
     })
 
     return response.status === 200
-  } catch (error) {
-    console.error("Erro ao atualizar configuração da loja:", error)
+  } catch (error:any) {
+    console.error("Erro ao atualizar configuração da loja:", error.message)
     return false
   }
 }
@@ -270,8 +287,8 @@ export const createDefaultStoreConfigs = async () => {
   try {
     const response = await axios.post(`${apiUrl}/store/createDefaultConfig`)
     return response.data
-  } catch (error) {
-    console.error("Erro ao criar configurações padrão da loja:", error)
+  } catch (error:any) {
+    console.error("Erro ao criar configurações padrão da loja:", error.message)
     throw error
   }
 }
