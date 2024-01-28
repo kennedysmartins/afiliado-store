@@ -4,11 +4,6 @@ import { UserLoginForm } from "@/components/FormUserLogin"
 import { UserRegisterForm } from "@/components/FormUserRegister"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
-export const metadata: Metadata = {
-  title: "Authentication",
-  description: "Authentication forms built using the components.",
-}
-
 export default function AuthenticationPage() {
   return (
     <>
