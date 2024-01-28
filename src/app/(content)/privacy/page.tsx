@@ -7,9 +7,11 @@ const PagePrivacy = () => {
       <Navbar />
       <main className="mx-auto container text-2xl gap-2 my-10 px-4">
         <p className="mb-4">
-          Bem-vindo à Política de Privacidade da Afiliado Store ("nós", "nosso",
-          ou "Afiliado Store"). Ao acessar ou usar a aplicação Afiliado Store (a
-          "Aplicação"), você concorda em cumprir esta Política de Privacidade.
+          Bem-vindo à Política de Privacidade da Afiliado Store
+          (&quot;nós&quot;, &quot;nosso&quot;, ou &quot;Afiliado Store&quot;).
+          Ao acessar ou usar a aplicação Afiliado Store (a
+          &quot;Aplicação&quot;), você concorda em cumprir esta Política de
+          Privacidade.
         </p>
         <section className="mb-4">
           <h2 className="text-xl font-bold mb-2">1. Informações Coletadas</h2>
@@ -71,6 +73,5 @@ const PagePrivacy = () => {
     </>
   )
 }
-
 
 export default PagePrivacy

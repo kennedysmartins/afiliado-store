@@ -7,10 +7,10 @@ const PageTerms = () => {
       <Navbar />
       <main className="mx-auto container text-2xl gap-2 my-10 px-4">
         <p className="mb-4">
-          Bem-vindo aos Termos de Serviço da Afiliado Store ("nós", "nosso", ou
-          "Afiliado Store"). Ao acessar ou usar a aplicação Afiliado Store (a
-          "Aplicação"), você concorda em ficar vinculado por estes Termos de
-          Serviço.
+          Bem-vindo aos Termos de Serviço da Afiliado Store (&ldquo;nós&rdquo;,
+          &ldquo;nosso&rdquo;, ou &ldquo;Afiliado Store&rdquo;). Ao acessar ou
+          usar a aplicação Afiliado Store (a &ldquo;Aplicação&rdquo;), você
+          concorda em ficar vinculado por estes Termos de Serviço.
         </p>
         <section className="mb-4">
           <h2 className="text-xl font-bold mb-2">1. Uso da Aplicação</h2>
