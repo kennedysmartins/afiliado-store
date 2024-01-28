@@ -92,7 +92,7 @@ export function AdminSidebarMobile() {
               Usuário
             </h2>
             <div className="space-y-1">
-              <Link href="/admin/products">
+              <Link href="/profile">
                 <Button variant="ghost" className="w-full justify-start gap-2">
                   <FiUser className="text-primary" />
                   Meu Perfil

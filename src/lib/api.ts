@@ -72,6 +72,21 @@ export const fetchProduct = async (id: string) => {
   return null
 }
 
+export const getUserById = async (id: string) => {
+  try {
+    const response = await axios.get(`${apiUrl}/users/${id}`)
+
+    if (response.status === 200) {
+      const user = response.data
+      return user
+    }
+  } catch (error:any) {
+    console.error("Erro ao buscar o usuário", error.message)
+  }
+
+  return null
+}
+
 export const extractProduct = async (url: string) => {
   try {
     const response = await axios.post(`${apiUrl}/extractor`, {
@@ -91,7 +106,6 @@ export const extractProduct = async (url: string) => {
   
 export const updateProduct = async (id: string, data: object) => {
   try {
-    console.log(`${apiUrl}/products/${id}`)
     const response = await axios.put(`${apiUrl}/products/${id}`, data, {
       headers: {
         "Content-Type": "application/json",
@@ -101,6 +115,23 @@ export const updateProduct = async (id: string, data: object) => {
     return response.status === 200
   } catch (error:any) {
     console.error("Erro ao atualizar o produto", error.message)
+    return false
+  }
+}
+export const updateUser = async (id: string, data: object, image: File) => {
+  try {
+    const formData = new FormData()
+    formData.append("image", image)
+
+    const response = await axios.put(`${apiUrl}/users/${id}`, data, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    })
+
+    return response.status === 200
+  } catch (error) {
+    console.error("Erro ao atualizar o usuário", error)
     return false
   }
 }
@@ -138,60 +169,6 @@ export const createUser = async (data: object) => {
     return error.message
   }
 }
-
-
-
- // const fetchCategories = async () => {
-//   try {
-//     const response = await fetch(`${apiUrl}/categories`);
-//     const categories = await response.json();
-//     return categories;
-//   } catch (error:any) {
-//     console.error('Erro ao buscar categorias', error.message);
-//     return [];
-//   }
-// };
-
- // const deleteCategory = async (categoryId) => {
-//   try {
-//     const response = await fetch(`${apiUrl}/categories/${categoryId}`, {
-//       method: 'DELETE',
-//     });
-
-//     if (response.status === 204) {
-//       // A exclusão foi bem-sucedida (status 204)
-//       return true;
-//     } else {
-//       // Trate os erros, se necessário
-//       return false;
-//     }
-//   } catch (error:any) {
-//     // Trate os erros de rede ou outras exceções, se necessário
-//     return false;
-//   }
-// };
-
- // const fetchCategoriesOrderByName = async () => {
-//   try {
-//     const response = await fetch(`${apiUrl}/categories/categoriesOrderByName`);
-//     const categories = await response.json();
-//     return categories;
-//   } catch (error:any) {
-//     console.error('Erro ao buscar categorias', error.message);
-//     return [];
-//   }
-// };
-
-
- // const fetchProductsPaginated = async (page, pageSize) => {
-//   try {
-//     const response = await fetch(`${apiUrl}/products/paginated?page=${page}&pageSize=${pageSize}`);
-//     const productsData = await response.json();
-//     return productsData;
-//   } catch (error:any) {
-//     throw new Error('Erro ao obter produtos paginados. Detalhes: ' + error.message);
-//   }
-// };
 
 interface ResponseData {
   [key: string]: any;
