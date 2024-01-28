@@ -89,7 +89,7 @@ export function AdminSidebarMobile() {
 
           <div className="py-2">
             <h2 className="mb-2 text-lg font-semibold tracking-tight">
-              Usuário
+              Usuários
             </h2>
             <div className="space-y-1">
               <Link href="/profile">
@@ -98,6 +98,13 @@ export function AdminSidebarMobile() {
                   Meu Perfil
                 </Button>
               </Link>
+
+               <Link href="/admin/users">
+              <Button variant="ghost" className="w-full justify-start gap-2">
+                <FiUser className="text-primary" />
+                Usuários
+              </Button>
+            </Link>
 
               <Button
                 onClick={() => {

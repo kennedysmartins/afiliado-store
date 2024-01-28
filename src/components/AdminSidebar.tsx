@@ -103,12 +103,19 @@ export function AdminSidebar({ className }: { className?: string }) {
         </div>
 
         <div className="py-2">
-          <h2 className="mb-2 text-lg font-semibold tracking-tight">Usuário</h2>
+          <h2 className="mb-2 text-lg font-semibold tracking-tight">Usuários</h2>
           <div className="space-y-1">
+
             <Link href="/profile">
               <Button variant="ghost" className="w-full justify-start gap-2">
                 <FiUser className="text-primary" />
                 Meu Perfil
+              </Button>
+            </Link>
+            <Link href="/admin/users">
+              <Button variant="ghost" className="w-full justify-start gap-2">
+                <FiUser className="text-primary" />
+                Usuários
               </Button>
             </Link>
 
