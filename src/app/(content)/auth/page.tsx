@@ -1,4 +1,3 @@
-import { Metadata } from "next"
 import Link from "next/link"
 import { UserLoginForm } from "@/components/FormUserLogin"
 import { UserRegisterForm } from "@/components/FormUserRegister"
