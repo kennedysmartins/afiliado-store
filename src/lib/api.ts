@@ -15,6 +15,16 @@ export const fetchProducts = async () => {
   }
 }
 
+export const fetchUsers = async () => {
+  try {
+    const response = await axios.get(`${apiUrl}/users`)
+    return response.data
+  } catch (error: any) {
+    console.error("Erro ao obter usuários:", error.message)
+    throw error // Você pode tratar o erro de outra maneira, se preferir.
+  }
+}
+
 export const deleteProduct = async (productId: string) => {
   try {
     const response = await axios.delete(`${apiUrl}/products/${productId}`)
@@ -29,6 +39,24 @@ export const deleteProduct = async (productId: string) => {
   } catch (error:any) {
     // Trate os erros de rede ou outras exceções, se necessário
     console.error("Erro ao excluir produto:", error.message)
+    return false // Você pode tratar o erro de outra maneira, se preferir.
+  }
+}
+
+export const deleteUser = async (userId: string) => {
+  try {
+    const response = await axios.delete(`${apiUrl}/users/${userId}`)
+
+    if (response.status === 204) {
+      // A exclusão foi bem-sucedida (status 204)
+      return true
+    } else {
+      // Trate os erros, se necessário
+      return false
+    }
+  } catch (error: any) {
+    // Trate os erros de rede ou outras exceções, se necessário
+    console.error("Erro ao excluir o usuário:", error.message)
     return false // Você pode tratar o erro de outra maneira, se preferir.
   }
 }
