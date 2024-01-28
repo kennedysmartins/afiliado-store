@@ -2,10 +2,12 @@ import Link from "next/link"
 import { UserLoginForm } from "@/components/FormUserLogin"
 import { UserRegisterForm } from "@/components/FormUserRegister"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import Navbar from "@/components/Navbar"
 
 export default function AuthenticationPage() {
   return (
     <>
+    <Navbar />
       <div className="container relative h-dvh flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0">
         <div className="relative hidden h-full flex-col bg-muted p-10 text-white lg:flex dark:border-r">
           <div className="absolute inset-0 bg-[url('/login.png')] bg-center" />
