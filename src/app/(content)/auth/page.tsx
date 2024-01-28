@@ -59,7 +59,7 @@ export default function AuthenticationPage() {
                   </div>
                   <UserRegisterForm />
                   <p className="px-8 text-center text-sm text-muted-foreground mt-4">
-                    Ao clicar em continue, você aceita os nosssos{" "}
+                    Ao clicar em continue, você aceita os nossos{" "}
                     <Link
                       href="/terms"
                       className="underline underline-offset-4 hover:text-primary"
@@ -89,16 +89,16 @@ export default function AuthenticationPage() {
                   </div>
                   <UserLoginForm />
                   <p className="px-8 text-center text-sm text-muted-foreground mt-4">
-                    Ao clicar em continue, você aceita os nosssos{" "}
+                    Ao clicar em continue, você aceita os nossos{" "}
                     <Link
-                      href="/termos"
+                      href="/terms"
                       className="underline underline-offset-4 hover:text-primary"
                     >
                       Termos de serviço
                     </Link>{" "}
                     e nossa{" "}
                     <Link
-                      href="/privacidade"
+                      href="/privacy"
                       className="underline underline-offset-4 hover:text-primary"
                     >
                       Politica de privacidade
